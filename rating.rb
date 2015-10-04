@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
+require 'singleton'
 
-class Rating
-  
+class RatingManager
+  include Singleton
 end
