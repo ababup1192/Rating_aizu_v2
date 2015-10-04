@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 require 'tk'
 require_relative './command'
 
@@ -21,6 +20,7 @@ class MainWindow
     # @mailing_list = []
     # @file = nil
     show
+    Tk.mainloop
   end
 
   def show
@@ -28,7 +28,6 @@ class MainWindow
       title '採点ツール'
       geometry '1000x630'
     }
-    Tk.mainloop
   end
 end
 
