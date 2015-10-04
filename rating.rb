@@ -3,4 +3,6 @@ require 'singleton'
 
 class RatingManager
   include Singleton
+
+
 end

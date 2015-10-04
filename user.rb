@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-require 'SecureRandom'
 
 # ユーザ(学生)。ユーザはIDと点数を持つ。
 class User
@@ -10,4 +9,9 @@ class User
     @user_id = user_id
     @point = 0
   end
+
+  def to_s
+    "#{@user_id} -> #{@point}"
+  end
 end
+
