@@ -261,6 +261,54 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#mark-instance_method" title="#mark (instance method)">- (Object) <strong>mark</strong>(point) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>点数を付ける.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mark_next-instance_method" title="#mark_next (instance method)">- (Object) <strong>mark_next</strong>(user_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>次の採点対象を決める.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#set_rating-instance_method" title="#set_rating (instance method)">- (Object) <strong>set_rating</strong>(mailing_list_path, target_dir, target_files, compile_command, execute_command) </a>
     
 
@@ -318,12 +366,12 @@
       <pre class="lines">
 
 
-9
 10
-11</pre>
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_compile_command'>compile_command</span>
   <span class='ivar'>@compile_command</span>
@@ -361,12 +409,12 @@
       <pre class="lines">
 
 
-9
 10
-11</pre>
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_command'>execute_command</span>
   <span class='ivar'>@execute_command</span>
@@ -404,12 +452,12 @@
       <pre class="lines">
 
 
-9
 10
-11</pre>
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_target_dir'>target_dir</span>
   <span class='ivar'>@target_dir</span>
@@ -447,12 +495,12 @@
       <pre class="lines">
 
 
-9
 10
-11</pre>
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_target_files'>target_files</span>
   <span class='ivar'>@target_files</span>
@@ -490,12 +538,12 @@
       <pre class="lines">
 
 
-9
 10
-11</pre>
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user_repo'>user_repo</span>
   <span class='ivar'>@user_repo</span>
@@ -513,7 +561,145 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="set_rating-instance_method">
+  <h3 class="signature first" id="mark-instance_method">
+  
+    - (<tt>Object</tt>) <strong>mark</strong>(point) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>点数を付ける</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>点数</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='ivar'>@user_repo</span><span class='period'>.</span><span class='id identifier rubyid_find_user'>find_user</span><span class='lparen'>(</span><span class='ivar'>@current_rating</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_point'>point</span> <span class='op'>=</span> <span class='id identifier rubyid_point'>point</span>
+  <span class='ivar'>@user_repo</span><span class='period'>.</span><span class='id identifier rubyid_update_user!'>update_user!</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+  <span class='comment'># TODO user_repoをMainWindowへ反映
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mark_next-instance_method">
+  
+    - (<tt>Object</tt>) <strong>mark_next</strong>(user_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>次の採点対象を決める</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ユーザID(学籍番号)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_mark_next'>mark_next</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+  <span class='comment'># もし前の採点が続いているなら終了する。
+</span>  <span class='kw'>if</span> <span class='ivar'>@current_rating</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='kw'>then</span>
+    <span class='ivar'>@current_rating</span><span class='period'>.</span><span class='id identifier rubyid_exit'>exit</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@current_rating</span> <span class='op'>=</span> <span class='const'>Rating</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='ivar'>@target_dir</span><span class='comma'>,</span> <span class='ivar'>@target_files</span><span class='rparen'>)</span>
+  <span class='ivar'>@current_rating</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_rating-instance_method">
   
     - (<tt>Object</tt>) <strong>set_rating</strong>(mailing_list_path, target_dir, target_files, compile_command, execute_command) 
   
@@ -622,7 +808,6 @@
       <pre class="lines">
 
 
-18
 19
 20
 21
@@ -630,19 +815,22 @@
 23
 24
 25
-26</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_rating'>set_rating</span><span class='lparen'>(</span><span class='id identifier rubyid_mailing_list_path'>mailing_list_path</span><span class='comma'>,</span> <span class='id identifier rubyid_target_dir'>target_dir</span><span class='comma'>,</span> <span class='id identifier rubyid_target_files'>target_files</span><span class='comma'>,</span>
                <span class='id identifier rubyid_compile_command'>compile_command</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_command'>execute_command</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_mailing_list'>mailing_list</span> <span class='op'>=</span> <span class='id identifier rubyid_readmaling_list'>readmaling_list</span><span class='lparen'>(</span><span class='id identifier rubyid_mailing_list_path'>mailing_list_path</span><span class='rparen'>)</span>
-  <span class='ivar'>@user_repo</span> <span class='op'>=</span> <span class='id identifier rubyid_create_users'>create_users</span><span class='lparen'>(</span><span class='id identifier rubyid_maling_list'>maling_list</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_mailing_list'>mailing_list</span> <span class='op'>=</span> <span class='id identifier rubyid_read_mailing_list'>read_mailing_list</span><span class='lparen'>(</span><span class='id identifier rubyid_mailing_list_path'>mailing_list_path</span><span class='rparen'>)</span>
+  <span class='ivar'>@user_repo</span> <span class='op'>=</span> <span class='const'>UserRepository</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_mailing_list'>mailing_list</span><span class='rparen'>)</span>
   <span class='ivar'>@target_dir</span> <span class='op'>=</span> <span class='id identifier rubyid_target_dir'>target_dir</span>
   <span class='ivar'>@target_files</span> <span class='op'>=</span> <span class='id identifier rubyid_target_files'>target_files</span>
   <span class='ivar'>@compile_command</span> <span class='op'>=</span> <span class='id identifier rubyid_compile_command'>compile_command</span>
   <span class='ivar'>@execute_command</span> <span class='op'>=</span> <span class='id identifier rubyid_execute_command'>execute_command</span>
+  <span class='ivar'>@current_rating</span> <span class='op'>=</span> <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -654,7 +842,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Oct  5 00:02:26 2015 by
+  Generated on Mon Oct  5 20:10:13 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

@@ -32,7 +32,7 @@ class UserRepository
   end
 
   # ユーザ情報(主に点数)の更新
-  # @param [User] ユーザの更新情報
+  # @param [User] user ユーザの更新情報
   def update_user!(user)
     index = @users.index{ |u| u.id == user.id }
     if index != nil then

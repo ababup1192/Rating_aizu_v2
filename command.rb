@@ -43,13 +43,13 @@ class CommandExecutor
   # @param [String] command コマンド文字列
   # @param [PostTask] observer コマンド終了時処理
   # @param [Integer] time タイムアウト時間(秒)
-  def initialize(command, observer, time)
+  def initialize(execute_dir, command, observer, time)
     @command = command
     @task = Concurrent::Future.new {
       timeout(time){
         out_r, out_w = IO.pipe
         err_r, err_w = IO.pipe
-        spawn @command, {out: out_w, err: err_w}
+        spawn @command, {out: out_w, err: err_w, chdir: execute_dir}
         out_w.close
         err_w.close
         out_r.read
@@ -77,7 +77,7 @@ class ExecuteManager
   # @param [String] compile_command コンパイルコマンド文字列
   # @param [String] execute_command 実行コマンド文字列
   # @param [Integer] time タイムアウト時間(秒)
-  def initialize(compile_command, execute_command, time)
+  def initialize(execute_dir, compile_command, execute_command, time)
     # 実行コマンドのオブザーバーの生成
     execute_task = PostTask.new
     execute_task.register(:stdout) do |value|
@@ -93,7 +93,7 @@ class ExecuteManager
     end
 
     # 実行コマンド制御
-    @executor = CommandExecutor.new(execute_command, execute_task, time)
+    @executor = CommandExecutor.new(execute_dir, execute_command, execute_task, time)
 
     # コンパイルコマンドのオブザーバーの生成
     compile_task = PostTask.new
@@ -113,7 +113,7 @@ class ExecuteManager
       @executor.execute
     end
 
-    @compile_executor = CommandExecutor.new(compile_command, compile_task, time)
+    @compile_executor = CommandExecutor.new(execute_dir, compile_command, compile_task, time)
   end
 
   # コマンドの実行(コンパイルが終了次第、

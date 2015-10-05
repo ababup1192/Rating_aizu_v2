@@ -176,7 +176,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ExecuteManager) <strong>initialize</strong>(compile_command, execute_command, time) </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ExecuteManager) <strong>initialize</strong>(execute_dir, compile_command, execute_command, time) </a>
     
 
     
@@ -208,7 +208,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="ExecuteManager (class)">ExecuteManager</a></span></tt>) <strong>initialize</strong>(compile_command, execute_command, time) 
+    - (<tt><span class='object_link'><a href="" title="ExecuteManager (class)">ExecuteManager</a></span></tt>) <strong>initialize</strong>(execute_dir, compile_command, execute_command, time) 
   
 
   
@@ -325,7 +325,7 @@
     <td>
       <pre class="code"><span class="info file"># File 'command.rb', line 80</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_compile_command'>compile_command</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_command'>execute_command</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_execute_dir'>execute_dir</span><span class='comma'>,</span> <span class='id identifier rubyid_compile_command'>compile_command</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_command'>execute_command</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
   <span class='comment'># 実行コマンドのオブザーバーの生成
 </span>  <span class='id identifier rubyid_execute_task'>execute_task</span> <span class='op'>=</span> <span class='const'>PostTask</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
   <span class='id identifier rubyid_execute_task'>execute_task</span><span class='period'>.</span><span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='symbol'>:stdout</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
@@ -341,7 +341,7 @@
   <span class='kw'>end</span>
 
   <span class='comment'># 実行コマンド制御
-</span>  <span class='ivar'>@executor</span> <span class='op'>=</span> <span class='const'>CommandExecutor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_execute_command'>execute_command</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_task'>execute_task</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
+</span>  <span class='ivar'>@executor</span> <span class='op'>=</span> <span class='const'>CommandExecutor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_execute_dir'>execute_dir</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_command'>execute_command</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_task'>execute_task</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
 
   <span class='comment'># コンパイルコマンドのオブザーバーの生成
 </span>  <span class='id identifier rubyid_compile_task'>compile_task</span> <span class='op'>=</span> <span class='const'>PostTask</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -361,7 +361,7 @@
     <span class='ivar'>@executor</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span>
   <span class='kw'>end</span>
 
-  <span class='ivar'>@compile_executor</span> <span class='op'>=</span> <span class='const'>CommandExecutor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_compile_command'>compile_command</span><span class='comma'>,</span> <span class='id identifier rubyid_compile_task'>compile_task</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
+  <span class='ivar'>@compile_executor</span> <span class='op'>=</span> <span class='const'>CommandExecutor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_execute_dir'>execute_dir</span><span class='comma'>,</span> <span class='id identifier rubyid_compile_command'>compile_command</span><span class='comma'>,</span> <span class='id identifier rubyid_compile_task'>compile_task</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -466,7 +466,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Oct  5 00:02:26 2015 by
+  Generated on Mon Oct  5 20:10:13 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
