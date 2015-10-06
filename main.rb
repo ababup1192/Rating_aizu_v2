@@ -1,34 +1,32 @@
 # -*- coding: utf-8 -*-
 require 'tk'
-require_relative './command'
-
-=begin
-
-# コンパイルコマンド, 実行コマンド, タイムアウト(秒)
-ExecuteManager.new('ls -l', 'date', 3).execute
-
-puts 'はじめ'
-sleep 3
-puts 'おわり'
-
-=end
+require 'singleton'
+require_relative 'rating'
 
 class MainWindow
+  include Singleton
 
-  def initialize
-    # @setting = Setting.new
-    # @mailing_list = []
-    # @file = nil
-    show
+  def launch
+    window = TkRoot.new{
+      title 'Rating Aizu'
+      resizable [0, 0]
+      geometry '300x200+100+100'
+    }
+
+    helloworld = TkLabel.new{
+      text 'Hello World'
+      pack
+    }
+
+    button = TkButton.new{
+      text 'exit'
+      command proc{ exit }
+      pack
+    }
+
     Tk.mainloop
   end
 
-  def show
-    root = TkRoot.new{
-      title '採点ツール'
-      geometry '1000x630'
-    }
-  end
 end
 
-MainWindow.new.show
+MainWindow.instance.launch

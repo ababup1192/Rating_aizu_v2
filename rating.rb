@@ -7,7 +7,7 @@ require_relative 'user'
 class RatingManager
   include Singleton
 
-  attr_accessor :user_repo, :target_dir, :target_files,
+  attr_accessor :user_repo, :target_files,
                   :compile_command, :execute_command
 
   # 採点の初期設定を行う
@@ -20,16 +20,15 @@ class RatingManager
                  compile_command, execute_command)
     mailing_list = read_mailing_list(mailing_list_path)
     @user_repo = UserRepository.new(mailing_list)
-    @target_dir = target_dir
-    @target_files = target_files
+    @target_files = target_files.map{ |file| target_dir + '/' + file }
     @compile_command = compile_command
     @execute_command = execute_command
     @current_rating = nil
   end
 
   # メーリングリストを読み込み
-  # @param [String] path
-  # @return [Array<String>] メーリングリスト
+  # @param [String] path メーリングリストのパス
+  # @return [Array<String>] メーリングリスト(配列)
   def read_mailing_list(path)
       mailing_list = Array.new
       File.open(path) do |file|
@@ -52,7 +51,7 @@ class RatingManager
     if @current_rating != nil then
       @current_rating.exit
     end
-    @current_rating = Rating.new(user_id, @target_dir, @target_files)
+    @current_rating = Rating.new(user_id, @target_files)
     @current_rating.execute
   end
 
@@ -73,12 +72,10 @@ class Rating
 
   # 採点に必要な情報の初期化
   # @param [String] user_id ユーザID(学籍番号)
-  # @param [String] target_dir コピー対象のディレクトリパス
   # @param [Array<String>] target_files コピー対象のファイル名
-  def initialize(user_id, target_dir, target_files)
+  def initialize(user_id, target_files)
     @user_id = user_id
     @uuid = SecureRandom.uuid
-    @target_dir = target_dir
     @target_files = target_files
     @manager = RatingManager.instance
     @execute_dir = '/tmp/rating-aizu/' + @uuid
@@ -88,7 +85,6 @@ class Rating
   # 採点対象ファイルを実行ディレクトリへコピーする
   def copy_targetfiles
     FileUtils.mkdir_p(@execute_dir)
-    @target_files.map!{ |file| @target_dir + '/' + file }
     FileUtils.cp(@target_files, @execute_dir)
   end
 
@@ -103,7 +99,20 @@ class Rating
 
   # 採点を終了する
   def exit
+    # 実行ディレクトリを削除する
+    FileUtils.remove_dir(@execute_dir)
     @execute_manager.cancel
   end
 end
 
+# manager = RatingManager.instance
+# manager.set_rating('/Users/watanabemirai/Desktop/test/mail_list',
+#                   '/Users/watanabemirai/Desktop/test', ['hoge.c', 'in'],
+#                   'ls', 'ls')
+
+# manager.mark_next('s1150253')
+# sleep 0.05
+# manager.mark_next('s1150254')
+# sleep 0.05
+# manager.mark_next('s1150255')
+#
