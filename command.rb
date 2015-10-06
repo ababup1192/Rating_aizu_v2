@@ -49,7 +49,8 @@ class CommandExecutor
       timeout(time){
         out_r, out_w = IO.pipe
         err_r, err_w = IO.pipe
-        spawn @command, {out: out_w, err: err_w, chdir: execute_dir}
+        @pid = spawn @command, {out: out_w, err: err_w, chdir: execute_dir}
+        @thread = Process.detach(@pid)
         out_w.close
         err_w.close
         out_r.read
@@ -68,7 +69,15 @@ class CommandExecutor
     if @task.state == :pending then
       @task.cancel
     end
+    force_kill
   end
+
+  def force_kill
+    Process.kill 'KILL', @pid if @pid != nil && @thread.status
+    @thread.kill if !@thread.nil?
+  end
+  private :force_kill
+
 end
 
 # コンパイルコマンドと実行コマンドの制御

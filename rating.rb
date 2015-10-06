@@ -8,7 +8,7 @@ class RatingManager
   include Singleton
 
   attr_accessor :user_repo, :target_files,
-                  :compile_command, :execute_command
+                  :compile_command, :execute_command, :current_rating
 
   # 採点の初期設定を行う
   # @param [String] mailing_list_path メーリングリストのファイルパス
@@ -63,6 +63,11 @@ class RatingManager
     @user_repo.update_user!(user)
     # TODO user_repoをMainWindowへ反映
   end
+
+  # 現在の採点を終了する
+  def exit
+    @current_rating.exit
+  end
 end
 
 # 対象となるファイルをコピーし、コンパイル・実行・採点を行う
@@ -107,12 +112,15 @@ end
 
 # manager = RatingManager.instance
 # manager.set_rating('/Users/watanabemirai/Desktop/test/mail_list',
-#                   '/Users/watanabemirai/Desktop/test', ['hoge.c', 'in'],
-#                   'ls', 'ls')
+#                    '/Users/watanabemirai/Desktop/test', ['hoge.c', 'in'],
+#                    'open .', 'echo hogehoge')
 
 # manager.mark_next('s1150253')
-# sleep 0.05
+# sleep 3
 # manager.mark_next('s1150254')
-# sleep 0.05
+# sleep 3
 # manager.mark_next('s1150255')
-#
+# sleep 3
+# manager.exit
+# sleep 3
+
