@@ -140,6 +140,33 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#current_rating-instance_method" title="#current_rating (instance method)">- (Object) <strong>current_rating</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute current_rating.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#execute_command-instance_method" title="#execute_command (instance method)">- (Object) <strong>execute_command</strong> </a>
     
 
@@ -230,6 +257,30 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit-instance_method" title="#exit (instance method)">- (Object) <strong>exit</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>現在の採点を終了する.</p>
+</div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -348,6 +399,49 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_compile_command'>compile_command</span>
   <span class='ivar'>@compile_command</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="current_rating=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="current_rating-instance_method">
+  
+    - (<tt>Object</tt>) <strong>current_rating</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute current_rating</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_current_rating'>current_rating</span>
+  <span class='ivar'>@current_rating</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -491,7 +585,48 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="mark-instance_method">
+  <h3 class="signature first" id="exit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>exit</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>現在の採点を終了する</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rating.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_exit'>exit</span>
+  <span class='ivar'>@current_rating</span><span class='period'>.</span><span class='id identifier rubyid_exit'>exit</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mark-instance_method">
   
     - (<tt>Object</tt>) <strong>mark</strong>(point) 
   
@@ -770,7 +905,7 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Oct  6 16:29:26 2015 by
+  Generated on Mon Oct 12 20:32:13 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

@@ -296,7 +296,8 @@
 56
 57
 58
-59</pre>
+59
+60</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'command.rb', line 46</span>
@@ -307,7 +308,8 @@
     <span class='id identifier rubyid_timeout'>timeout</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span><span class='lbrace'>{</span>
       <span class='id identifier rubyid_out_r'>out_r</span><span class='comma'>,</span> <span class='id identifier rubyid_out_w'>out_w</span> <span class='op'>=</span> <span class='const'>IO</span><span class='period'>.</span><span class='id identifier rubyid_pipe'>pipe</span>
       <span class='id identifier rubyid_err_r'>err_r</span><span class='comma'>,</span> <span class='id identifier rubyid_err_w'>err_w</span> <span class='op'>=</span> <span class='const'>IO</span><span class='period'>.</span><span class='id identifier rubyid_pipe'>pipe</span>
-      <span class='id identifier rubyid_spawn'>spawn</span> <span class='ivar'>@command</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='label'>out:</span> <span class='id identifier rubyid_out_w'>out_w</span><span class='comma'>,</span> <span class='label'>err:</span> <span class='id identifier rubyid_err_w'>err_w</span><span class='comma'>,</span> <span class='label'>chdir:</span> <span class='id identifier rubyid_execute_dir'>execute_dir</span><span class='rbrace'>}</span>
+      <span class='ivar'>@pid</span> <span class='op'>=</span> <span class='id identifier rubyid_spawn'>spawn</span> <span class='ivar'>@command</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='label'>out:</span> <span class='id identifier rubyid_out_w'>out_w</span><span class='comma'>,</span> <span class='label'>err:</span> <span class='id identifier rubyid_err_w'>err_w</span><span class='comma'>,</span> <span class='label'>chdir:</span> <span class='id identifier rubyid_execute_dir'>execute_dir</span><span class='rbrace'>}</span>
+      <span class='ivar'>@thread</span> <span class='op'>=</span> <span class='const'>Process</span><span class='period'>.</span><span class='id identifier rubyid_detach'>detach</span><span class='lparen'>(</span><span class='ivar'>@pid</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_out_w'>out_w</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
       <span class='id identifier rubyid_err_w'>err_w</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
       <span class='id identifier rubyid_out_r'>out_r</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span>
@@ -353,19 +355,21 @@
       <pre class="lines">
 
 
-67
 68
 69
 70
-71</pre>
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'command.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'command.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel'>cancel</span>
   <span class='kw'>if</span> <span class='ivar'>@task</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='symbol'>:pending</span> <span class='kw'>then</span>
     <span class='ivar'>@task</span><span class='period'>.</span><span class='id identifier rubyid_cancel'>cancel</span>
   <span class='kw'>end</span>
+  <span class='id identifier rubyid_force_kill'>force_kill</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -398,12 +402,12 @@
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'command.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'command.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute'>execute</span>
   <span class='ivar'>@task</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span>
@@ -418,7 +422,7 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Oct  6 16:29:25 2015 by
+  Generated on Mon Oct 12 20:32:13 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

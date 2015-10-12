@@ -25,13 +25,21 @@ class MainWindow
       pack side: 'left'
     }
     preferences = Dialog.new(preferences_button, '採点設定', 100, 100){
-      TkButton.new(preferences.dialog){
-        text 'exit'
-        command proc{preferences.close}
+      button = TkButton.new(preferences.dialog){
+        text 'open'
         pack
       }
+
+      dialog = Dialog.new(button, '二重',  200, 200){
+        TkButton.new(dialog.dialog){
+          text 'exit'
+          command dialog.method(:close)
+          pack
+        }
+      }
+      button.command(dialog.method(:launch))
     }
-    preferences_button.command = proc{preferences.launch}
+    preferences_button.command(preferences.method(:launch))
 
     preferences_label = TkLabel.new(top_frame){
       text '採点の設定を行ってください。'

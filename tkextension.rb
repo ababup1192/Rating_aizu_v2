@@ -1,22 +1,35 @@
+# -*- coding: utf-8 -*-
 require 'tk'
 
-
-
+# オリジナルダイアログ
 class Dialog
   attr_accessor :dialog
+
+  # @param [TkButton] button ダイアログを開くためのボタン
+  # @param [String] title ダイアログタイトル
+  # @param [Integer] width ダイアログの幅
+  # @param [Integer] height ダイアログの高さ
+  # @param [Proc] block ダイアログのウィジェット配置を行うブロック
   def initialize(button, title, width, height, &block)
+    dialog = self
     @dialog = TkToplevel.new(button){
       title title
       resizable [0, 0]
       geometry "#{width}x#{height}+150+150"
-      protocol 'WM_DELETE_WINDOW', proc{ puts 'hoge' }
+      protocol 'WM_DELETE_WINDOW', dialog.method(:close)
     }.withdraw
     @wait_var = TkVariable.new
+    @is_launch = false
     @block = block
   end
 
+  # ダイアログの表示
   def launch
-    @block.call
+    # 初回のみダイアログのウィジェット配置を行う
+    if !@is_launch && !@block.nil? then
+      @block.call
+      @is_launch = true
+    end
     # ダイアログの表示
     @dialog.deiconify
     # トップレベルWindowとして設定。
@@ -34,9 +47,13 @@ class Dialog
   end
 end
 
+# テキストとスクロールバー一体ウィジェット
 class TkTextWithScrollbar
   attr_accessor :tk_text
 
+  # @param [TkFrame] parent_frame 設置元
+  # @param [Integer] width テキストボックスの幅
+  # @param [Integer] height テキストボックスの高さ
   def initialize(parent_frame, width, height)
     @frame = TkFrame.new(parent_frame)
 
