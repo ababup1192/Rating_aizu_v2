@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'tk'
 require 'singleton'
+require_relative 'tkextension'
 require_relative 'rating'
 
 class MainWindow
@@ -12,7 +13,6 @@ class MainWindow
       title 'Rating Aizu'
       resizable [0, 0]
       geometry '820x540+150+150'
-
     }
 
     # 設定ボタン + 警告ラベル
@@ -24,20 +24,14 @@ class MainWindow
       text '設定'
       pack side: 'left'
     }
-
-    wait_var = TkVariable.new
-
-    preferences = open_preferences(preferences_button, wait_var)
-    preferences_button.command{
-      # grabで画面をロックする。
-      preferences.deiconify
-      preferences.set_grab
-      # waitでデータ入力を待つ。
-      wait_var.tkwait
-      # grabを解除し画面を解放する。
-      preferences.release_grab
-      preferences.withdraw
+    preferences = Dialog.new(preferences_button, '採点設定', 100, 100){
+      TkButton.new(preferences.dialog){
+        text 'exit'
+        command proc{preferences.close}
+        pack
+      }
     }
+    preferences_button.command = proc{preferences.launch}
 
     preferences_label = TkLabel.new(top_frame){
       text '採点の設定を行ってください。'
@@ -189,38 +183,6 @@ class MainWindow
     execute_textsc.pack
 
     Tk.mainloop
-  end
-end
-
-def open_preferences(button, var)
-    top = TkToplevel.new(button).withdraw
-    TkButton.new(top){
-      text 'close'
-      command proc{top.withdraw; var.value = 1}
-      pack
-    }
-    top
-end
-
-class TkTextWithScrollbar
-  attr_accessor :tk_text
-
-  def initialize(parent_frame, width, height)
-    @frame = TkFrame.new(parent_frame)
-
-    @tk_text = TkText.new(@frame){
-      width width
-      height height
-      yscrollbar @scrollbar
-    }
-
-    @scrollbar = TkScrollbar.new(@frame)
-  end
-
-  def pack
-    @frame.pack({side: 'top', pady: 15})
-    @tk_text.pack({'side' => 'left'})
-    @scrollbar.pack({side: 'right', fill: :y})
   end
 end
 
