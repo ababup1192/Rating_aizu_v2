@@ -12,6 +12,7 @@ class MainWindow
       title 'Rating Aizu'
       resizable [0, 0]
       geometry '820x540+150+150'
+
     }
 
     # 設定ボタン + 警告ラベル
@@ -19,10 +20,24 @@ class MainWindow
       pack({side: 'top', pady: 15})
     }
 
+
     preferences_button = TkButton.new(top_frame){
       text '設定'
-      command proc { exit }
       pack side: 'left'
+    }
+
+    wait_var = TkVariable.new
+
+    preferences = open_preferences(preferences_button, wait_var)
+    preferences_button.command{
+      # grabで画面をロックする。
+      preferences.deiconify
+      preferences.set_grab
+      # waitでデータ入力を待つ。
+      wait_var.tkwait
+      # grabを解除し画面を解放する。
+      preferences.release_grab
+      preferences.withdraw
     }
 
     preferences_label = TkLabel.new(top_frame){
@@ -133,7 +148,6 @@ class MainWindow
     }
 
     # ==== ソースコード表示 ====
-
     combobox_var = TkVariable.new
 
     file_combobox = TkCombobox.new(bottom_center_frame){
@@ -179,6 +193,16 @@ class MainWindow
   end
 end
 
+def open_preferences(button, var)
+    top = TkToplevel.new(button).withdraw
+    TkButton.new(top){
+      text 'close'
+      command proc{top.withdraw; var.value = 1}
+      pack
+    }
+    top
+end
+
 class TkTextWithScrollbar
   attr_accessor :tk_text
 
@@ -192,7 +216,6 @@ class TkTextWithScrollbar
     }
 
     @scrollbar = TkScrollbar.new(@frame)
-
   end
 
   def pack
