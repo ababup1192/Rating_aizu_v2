@@ -20,7 +20,6 @@ class MainWindow
       pack({side: 'top', pady: 15})
     }
 
-
     preferences_button = TkButton.new(top_frame){
       text '設定'
       pack side: 'left'

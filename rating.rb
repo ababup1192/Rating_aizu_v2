@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'singleton'
-require 'SecureRandom'
+require 'securerandom'
 require_relative 'command'
 require_relative 'user'
 
