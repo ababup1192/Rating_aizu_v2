@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'tk'
 require 'singleton'
-require_relative 'tkextension'
+require_relative 'preferences'
 require_relative 'rating'
 
 class MainWindow
@@ -24,22 +24,11 @@ class MainWindow
       text '設定'
       pack side: 'left'
     }
-    preferences = Dialog.new(preferences_button, '採点設定', 100, 100){
-      button = TkButton.new(preferences.dialog){
-        text 'open'
-        pack
-      }
-
-      dialog = Dialog.new(button, '二重',  200, 200){
-        TkButton.new(dialog.dialog){
-          text 'exit'
-          command dialog.method(:close)
-          pack
-        }
-      }
-      button.command(dialog.method(:launch))
-    }
-    preferences_button.command(preferences.method(:launch))
+    preferences = RatingPreferences.instance
+    preferences_button.command(
+      proc{
+        preferences.launch(preferences_button)}
+    )
 
     preferences_label = TkLabel.new(top_frame){
       text '採点の設定を行ってください。'

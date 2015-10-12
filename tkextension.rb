@@ -15,7 +15,7 @@ class Dialog
     @dialog = TkToplevel.new(button){
       title title
       resizable [0, 0]
-      geometry "#{width}x#{height}+150+150"
+      geometry "#{width}x#{height}"
       protocol 'WM_DELETE_WINDOW', dialog.method(:close)
     }.withdraw
     @wait_var = TkVariable.new
