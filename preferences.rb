@@ -8,7 +8,7 @@ require_relative 'tkextension'
 class RatingPreferences
   include Singleton
 
-  attr_accessor :ml_path, :ml_path_entry, :rating_path, :rating_path_entry
+  attr_accessor :ml_path, :rating_path, :result_path
 
   def launch(button)
     @dialog = Dialog.new(button, '採点設定', 470, 590){
@@ -34,8 +34,7 @@ class RatingPreferences
         text '変更'
         command proc{
           preferences = RatingPreferences.instance
-          preferences.ml_path = Tk.getOpenFile
-          TkUtils.set_entry_value(preferences.ml_path_entry, preferences.ml_path)
+          preferences.save_ml_path()
         }
         pack({side: 'left', padx: 15})
       }
@@ -59,8 +58,7 @@ class RatingPreferences
         text '変更'
         command proc{
           preferences = RatingPreferences.instance
-          preferences.rating_path = Tk.chooseDirectory(initialdir: preferences.ml_path)
-          TkUtils.set_entry_value(preferences.rating_path_entry, preferences.rating_path)
+          preferences.save_rating_path()
         }
         pack({side: 'left', padx: 15})
       }
@@ -126,14 +124,18 @@ class RatingPreferences
         pack({side: 'top'})
       }
 
-      result_entry = TkEntry.new(result_path_frame){
+      @result_entry = TkEntry.new(result_path_frame){
         width 40
+        state 'readonly'
         pack({side: 'left'})
       }
 
       result_path_button = TkButton.new(result_path_frame){
         text '変更'
-        command proc{Tk.getSaveFile}
+        command proc{
+          preferences = RatingPreferences.instance
+          preferences.save_result_path()
+        }
         pack({side: 'left', padx: 15})
       }
 
@@ -223,6 +225,7 @@ class RatingPreferences
     TkUtils.set_entry_value(@ml_path_entry, @ml_path)
     TkUtils.set_entry_value(@rating_path_entry, @rating_path)
     set_command()
+    TkUtils.set_entry_value(@result_entry, @result_path)
   end
 
   def set_command()
@@ -231,6 +234,21 @@ class RatingPreferences
                             command_select.compile_command)
     TkUtils.set_entry_value(@execute_command_entry,
                             command_select.execute_command)
+  end
+
+  def save_ml_path()
+    @ml_path = Tk.getOpenFile
+    TkUtils.set_entry_value(@ml_path_entry, @ml_path)
+  end
+
+  def save_rating_path()
+    @rating_path = Tk.chooseDirectory(initialdir: @ml_path)
+    TkUtils.set_entry_value(@rating_path_entry, @rating_path)
+  end
+
+  def save_result_path()
+    @result_path = Tk.getSaveFile
+    TkUtils.set_entry_value(@result_entry, @result_path)
   end
 
 end
