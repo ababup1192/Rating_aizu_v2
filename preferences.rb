@@ -75,13 +75,15 @@ class RatingPreferences
         pack({side: 'top', pady: 10})
       }
 
-      compile_command_entry = TkEntry.new(command_frame){
+      @compile_command_entry = TkEntry.new(command_frame){
         width 40
+        state 'readonly'
         pack({side: 'left'})
       }
 
-      execute_command_entry = TkEntry.new(dialog){
+      @execute_command_entry = TkEntry.new(dialog){
         width 40
+        state 'readonly'
         pack({side: 'top', anchor: 'w', padx: 27})
       }
 
@@ -131,7 +133,7 @@ class RatingPreferences
 
       result_path_button = TkButton.new(result_path_frame){
         text '変更'
-        command proc{puts 'hoge'}
+        command proc{Tk.getSaveFile}
         pack({side: 'left', padx: 15})
       }
 
@@ -220,6 +222,15 @@ class RatingPreferences
   def set_values()
     TkUtils.set_entry_value(@ml_path_entry, @ml_path)
     TkUtils.set_entry_value(@rating_path_entry, @rating_path)
+    set_command()
+  end
+
+  def set_command()
+    command_select = CommandSelect.instance
+    TkUtils.set_entry_value(@compile_command_entry,
+                            command_select.compile_command)
+    TkUtils.set_entry_value(@execute_command_entry,
+                            command_select.execute_command)
   end
 
 end

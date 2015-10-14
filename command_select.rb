@@ -171,6 +171,8 @@ class CommandSelect
   def save_command()
     @compile_command = @compile_entry.value
     @execute_command = @execute_entry.value
+    # 採点設定画面へコマンドの反映
+    preferences = RatingPreferences.instance.set_command()
   end
 
 
