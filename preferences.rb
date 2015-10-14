@@ -211,13 +211,13 @@ class RatingPreferences
       }
       cancel_button.command(@dialog.method(:close))
 
-      set_values
+      set_values()
     }
 
     @dialog.launch
   end
 
-  def set_values
+  def set_values()
     TkUtils.set_entry_value(@ml_path_entry, @ml_path)
     TkUtils.set_entry_value(@rating_path_entry, @rating_path)
   end

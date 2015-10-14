@@ -5,7 +5,17 @@ require 'singleton'
 class CommandSelect
   include Singleton
 
+  attr_accessor :target_files, :compile_command, :execute_command
+
   def launch(button)
+    if !@init_flag then
+      @target_files = Array.new
+      @tmp_arr = Array.new
+      @init_flag = true
+    else
+      @tmp_arr = Marshal.load(Marshal.dump(@target_files))
+    end
+
     @dialog = Dialog.new(button, '採点ファイルとコマンドの設定', 455, 490){
       dialog = @dialog.dialog
 
@@ -21,7 +31,7 @@ class CommandSelect
 
       filelist_scrollbar = TkScrollbar.new(filelist_frame)
 
-      filelist_box = TkListbox.new(filelist_frame){
+      @filelist_box = TkListbox.new(filelist_frame){
         height 5
         width 25
         yscrollbar filelist_scrollbar
@@ -29,11 +39,6 @@ class CommandSelect
       }
 
       filelist_scrollbar.pack(side: 'right', fill: :y)
-
-      # テストデータ
-      filelist_box.insert('end',  '$id.c -> $1')
-      filelist_box.insert('end',  '$id.h -> $2')
-      filelist_box.insert('end',  'input -> $3')
 
       # ファイル名の追加
       TkLabel.new(dialog){
@@ -46,20 +51,26 @@ class CommandSelect
         pack({side: 'top', pady: 10})
       }
 
-      file_entry = TkEntry.new(file_frame){
+      @file_entry = TkEntry.new(file_frame){
         width 20
         pack({side: 'left'})
       }
 
       add_button = TkButton.new(file_frame){
         text '追加'
-        command proc{puts 'hoge'}
+        command proc{
+          command_select = CommandSelect.instance
+          command_select.add_filelist()
+        }
         pack({side: 'left', padx: 10})
       }
 
       delete_button = TkButton.new(file_frame){
         text '削除'
-        command proc{puts 'hoge'}
+        command proc{
+          command_select = CommandSelect.instance
+          command_select.delete_filelist()
+        }
         pack({side: 'left', padx: 5})
       }
 
@@ -69,13 +80,13 @@ class CommandSelect
         pack({side: 'top', anchor: 'w', padx: 10, pady: 10})
       }
 
-      compile_entry = TkEntry.new(dialog){
+      @compile_entry = TkEntry.new(dialog){
         width 40
         pack({side: 'top'})
       }
 
       TkLabel.new(dialog){
-        text '※ ファイル名には、変数($1, $2...)を使用してください。'
+        text '※ ファイル名には、変数($0, $1...)を使用してください。'
         pack({side: 'top'})
       }
 
@@ -85,7 +96,7 @@ class CommandSelect
         pack({side: 'top', anchor: 'w', padx: 10, pady: 10})
       }
 
-      execute_entry = TkEntry.new(dialog){
+      @execute_entry = TkEntry.new(dialog){
         width 40
         pack({side: 'top'})
       }
@@ -98,15 +109,69 @@ class CommandSelect
         text 'OK'
         pack(side: 'left')
       }
-      ok_button.command(@dialog.method(:close))
+      ok_button.command(
+        proc{
+          command_select = CommandSelect.instance
+          command_select.save_command()
+          @dialog.close
+        }
+      )
 
       cancel_button = TkButton.new(button_frame){
         text 'キャンセル'
         pack(side: 'left', padx: 15)
       }
-      cancel_button.command(@dialog.method(:close))
+      cancel_button.command(
+        proc{
+          @target_files = Marshal.load(Marshal.dump(@tmp_arr))
+          @dialog.close
+        }
+      )
 
+      set_values()
     }
     @dialog.launch
   end
+
+  def set_values()
+    set_filelist()
+    set_command()
+  end
+
+  def set_filelist()
+    @filelist_box.clear()
+    if !@target_files.nil? then
+      @target_files.each_with_index do |file, i|
+        @filelist_box.insert('end', "#{file} -> $#{i}")
+      end
+    end
+  end
+
+  def add_filelist()
+    value = @file_entry.value.strip
+    @file_entry.value = ""
+    if !value.empty? then
+      @target_files << value
+    end
+    set_filelist()
+  end
+
+  def delete_filelist()
+    @filelist_box.curselection.each do |cur|
+      @target_files.delete_at(cur)
+    end
+    set_filelist()
+  end
+
+  def set_command()
+    @compile_entry.value = @compile_command if !@compile_command.nil?
+    @execute_entry.value = execute_command if !@execute_command.nil?
+  end
+
+  def save_command()
+    @compile_command = @compile_entry.value
+    @execute_command = @execute_entry.value
+  end
+
+
 end
