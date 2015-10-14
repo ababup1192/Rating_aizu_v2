@@ -43,4 +43,10 @@ class Input
     @dialog.launch
   end
 
+  def set_values
+    if !@value.nil? then
+      @input_textsc.tk_text.value = @value
+    end
+  end
+
 end

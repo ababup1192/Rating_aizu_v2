@@ -8,7 +8,7 @@ require_relative 'tkextension'
 class RatingPreferences
   include Singleton
 
-  attr_accessor :ml_path
+  attr_accessor :ml_path, :ml_path_entry, :rating_path, :rating_path_entry
 
   def launch(button)
     @dialog = Dialog.new(button, '採点設定', 470, 590){
@@ -24,7 +24,7 @@ class RatingPreferences
         pack({side: 'top'})
       }
 
-      ml_path_entry = TkEntry.new(ml_path_frame){
+      @ml_path_entry = TkEntry.new(ml_path_frame){
         width 40
         state 'readonly'
         pack({side: 'left'})
@@ -33,8 +33,9 @@ class RatingPreferences
       ml_path_button = TkButton.new(ml_path_frame){
         text '変更'
         command proc{
-          @ml_path = Tk.getOpenFile
-          TkUtils.set_entry_value(ml_path_entry, @ml_path)
+          preferences = RatingPreferences.instance
+          preferences.ml_path = Tk.getOpenFile
+          TkUtils.set_entry_value(preferences.ml_path_entry, preferences.ml_path)
         }
         pack({side: 'left', padx: 15})
       }
@@ -49,7 +50,7 @@ class RatingPreferences
         pack({side: 'top', pady: 10})
       }
 
-      rating_path_entry = TkEntry.new(rating_path_frame){
+      @rating_path_entry = TkEntry.new(rating_path_frame){
         width 40
         pack({side: 'left'})
       }
@@ -57,8 +58,9 @@ class RatingPreferences
       rating_path_button = TkButton.new(rating_path_frame){
         text '変更'
         command proc{
-          @rating_path = Tk.chooseDirectory(initialdir: @mailing_path)
-          TkUtils.set_entry_value(rating_path_entry, @rating_path)
+          preferences = RatingPreferences.instance
+          preferences.rating_path = Tk.chooseDirectory(initialdir: preferences.ml_path)
+          TkUtils.set_entry_value(preferences.rating_path_entry, preferences.rating_path)
         }
         pack({side: 'left', padx: 15})
       }
@@ -196,7 +198,12 @@ class RatingPreferences
         text 'OK'
         pack(side: 'left')
       }
-      ok_button.command(@dialog.method(:close))
+      ok_button.command(
+        proc{
+          MainWindow.instance.set_mailing_list_box(@ml_path)
+          @dialog.close
+        }
+      )
 
       cancel_button = TkButton.new(button_frame){
         text 'キャンセル'
@@ -204,8 +211,15 @@ class RatingPreferences
       }
       cancel_button.command(@dialog.method(:close))
 
+      set_values
     }
+
     @dialog.launch
+  end
+
+  def set_values
+    TkUtils.set_entry_value(@ml_path_entry, @ml_path)
+    TkUtils.set_entry_value(@rating_path_entry, @rating_path)
   end
 
 end

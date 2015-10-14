@@ -56,17 +56,13 @@ class MainWindow
 
     mail_scrollbar = TkScrollbar.new(mail_frame)
 
-    mailing_list_box = TkListbox.new(mail_frame){
+    @mailing_list_box = TkListbox.new(mail_frame){
       height 12
       yscrollbar mail_scrollbar
       pack side: 'left'
     }
 
     mail_scrollbar.pack(side: 'right', fill: :y)
-
-    (0..300).each{ |n|
-      mailing_list_box.insert('end',  "item #{n}")
-    }
 
     score_frame = TkFrame.new(bottom_left_frame){
       pack({side: 'top', pady: 15})
@@ -81,12 +77,12 @@ class MainWindow
     score_entry = TkEntry.new(score_frame){
       width 5
       bind 'Return', proc{
-        mailing_list_box.focus
+        @mailing_list_box.focus
       }
       pack({side: 'left', padx: 25})
     }
 
-    mailing_list_box.bind 'Return', proc{
+    @mailing_list_box.bind 'Return', proc{
       score_entry.focus
       score_entry.selection_range(0, 'end')
     }
@@ -140,7 +136,6 @@ class MainWindow
     combobox_var = TkVariable.new
 
     file_combobox = TkCombobox.new(bottom_center_frame){
-      state 'readonly'
       textvariable combobox_var
       pack({side: 'top'})
     }
@@ -152,6 +147,7 @@ class MainWindow
 
     source_textsc = TkTextWithScrollbar.new(bottom_center_frame, 35, 24)
     source_text = source_textsc.tk_text
+    source_text.state = 'disabled'
     source_textsc.pack
 
     # ==== 画面右 ====
@@ -167,6 +163,7 @@ class MainWindow
 
     compile_textsc = TkTextWithScrollbar.new(bottom_right_frame, 35, 5)
     compile_text = compile_textsc.tk_text
+    compile_text.state = 'disabled'
     compile_textsc.pack
 
     TkLabel.new(bottom_right_frame){
@@ -176,9 +173,24 @@ class MainWindow
 
     execute_textsc = TkTextWithScrollbar.new(bottom_right_frame, 35, 15)
     execute_text = execute_textsc.tk_text
+    execute_text.state = 'disabled'
     execute_textsc.pack
 
     Tk.mainloop
+  end
+
+  def set_mailing_list_box(ml_path)
+    if !ml_path.nil? then
+      File.open(ml_path) do |file|
+        file.each_line do |line|
+          line =~ /^(\w\d+)$/
+          if !$1.nil?
+            # arr << $1
+            @mailing_list_box.insert('end', $1)
+          end
+        end
+      end
+    end
   end
 end
 
