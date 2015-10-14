@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'tk'
 require 'singleton'
+require_relative 'input'
 require_relative 'command_select'
 require_relative 'tkextension'
 
@@ -63,7 +64,6 @@ class RatingPreferences
         pack({side: 'top', pady: 10})
       }
 
-
       compile_command_entry = TkEntry.new(command_frame){
         width 40
         pack({side: 'left'})
@@ -94,9 +94,14 @@ class RatingPreferences
 
       input_button = TkButton.new(dialog){
         text '変更'
-        command proc{puts 'hoge'}
         pack({side: 'top', anchor: 'w', padx: 20})
       }
+
+      input = Input.instance
+
+      input_button.command(
+        proc{input.launch(input_button)}
+      )
 
       # 成績ファイル
       TkLabel.new(dialog){
