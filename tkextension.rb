@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
 require 'tk'
 
+# Tkユーティリティクラス
+class TkUtils
+  def self.set_entry_value(entry, value)
+    if !value.nil? then
+      entry.state = 'normal'
+      entry.value = value
+      entry.state = 'readonly'
+    end
+  end
+end
+
 # オリジナルダイアログ
 class Dialog
   attr_accessor :dialog

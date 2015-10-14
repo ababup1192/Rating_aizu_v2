@@ -26,8 +26,7 @@ class MainWindow
     }
     preferences = RatingPreferences.instance
     preferences_button.command(
-      proc{
-        preferences.launch(preferences_button)}
+      proc{preferences.launch(preferences_button)}
     )
 
     preferences_label = TkLabel.new(top_frame){
@@ -89,7 +88,7 @@ class MainWindow
 
     mailing_list_box.bind 'Return', proc{
       score_entry.focus
-      score_entry.selection_range(0, score_entry.value.size)
+      score_entry.selection_range(0, 'end')
     }
 
     # ショートカット

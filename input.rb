@@ -6,13 +6,17 @@ require_relative 'tkextension'
 class Input
   include Singleton
 
+  attr_accessor :value
+
   def launch(button)
     @dialog = Dialog.new(button, '入力データの設定', 450, 400){
       dialog = @dialog.dialog
 
-      input_textsc = TkTextWithScrollbar.new(dialog, 50, 20)
-      input_text = input_textsc.tk_text
-      input_textsc.pack
+      @input_textsc = TkTextWithScrollbar.new(dialog, 50, 20)
+      input_text = @input_textsc.tk_text
+      @input_textsc.pack
+
+      set_values
 
       button_frame = TkFrame.new(dialog){
         pack(side: 'top', pady: 5)
@@ -22,7 +26,12 @@ class Input
         text 'OK'
         pack(side: 'left')
       }
-      ok_button.command(@dialog.method(:close))
+      ok_button.command(
+          proc{
+            @value = input_text.value
+            @dialog.close
+          }
+      )
 
       cancel_button = TkButton.new(button_frame){
         text 'キャンセル'

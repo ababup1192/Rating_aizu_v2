@@ -8,6 +8,8 @@ require_relative 'tkextension'
 class RatingPreferences
   include Singleton
 
+  attr_accessor :ml_path
+
   def launch(button)
     @dialog = Dialog.new(button, '採点設定', 470, 590){
       dialog = @dialog.dialog
@@ -24,12 +26,16 @@ class RatingPreferences
 
       ml_path_entry = TkEntry.new(ml_path_frame){
         width 40
+        state 'readonly'
         pack({side: 'left'})
       }
 
       ml_path_button = TkButton.new(ml_path_frame){
         text '変更'
-        command proc{puts 'hoge'}
+        command proc{
+          @ml_path = Tk.getOpenFile
+          TkUtils.set_entry_value(ml_path_entry, @ml_path)
+        }
         pack({side: 'left', padx: 15})
       }
 
@@ -50,7 +56,10 @@ class RatingPreferences
 
       rating_path_button = TkButton.new(rating_path_frame){
         text '変更'
-        command proc{puts 'hoge'}
+        command proc{
+          @rating_path = Tk.chooseDirectory(initialdir: @mailing_path)
+          TkUtils.set_entry_value(rating_path_entry, @rating_path)
+        }
         pack({side: 'left', padx: 15})
       }
 
@@ -171,14 +180,10 @@ class RatingPreferences
       }
 
       comma_radio.command proc{
-        delimiter_entry.state = 'normal'
-        delimiter_entry.value = 's1111111, 100'
-        delimiter_entry.state = 'readonly'
+        TkUtils.set_entry_value(delimiter_entry, "s1111111, 100")
       }
       tab_radio.command proc{
-        delimiter_entry.state = 'normal'
-        delimiter_entry.value = "s1111111\t100"
-        delimiter_entry.state = 'readonly'
+        TkUtils.set_entry_value(delimiter_entry, "s1111111\t100")
       }
       comma_radio.select
       comma_radio.invoke
