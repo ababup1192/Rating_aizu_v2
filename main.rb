@@ -77,6 +77,7 @@ class MainWindow
       yscrollbar mail_scrollbar
       bind '<ListboxSelect>', proc {
         main_window = MainWindow.instance
+        main_window.clear_result()
         main_window.set_score()
         main_window.set_filebox()
         main_window.mark_next()
@@ -235,6 +236,14 @@ class MainWindow
     end
   end
 
+  def clear_result()
+    compile_text = @compile_textsc.tk_text
+    execute_text = @execute_textsc.tk_text
+
+    TkUtils.set_text_value(compile_text, '')
+    TkUtils.set_text_value(execute_text, '')
+  end
+
   def get_rating_preparation
     items = ['メーリングリスト', '採点対象ディレクトリ',
              '採点対象ファイル', 'コンパイルコマンド', '実行コマンド',
@@ -264,6 +273,10 @@ class MainWindow
     items
   end
 
+  def rating?
+    get_rating_preparation.empty?
+  end
+
   def set_rating_label()
     items = get_rating_preparation
     if items.empty? then
@@ -289,6 +302,17 @@ class MainWindow
       @user_repo.update_user!(User.new(user.id, @score_entry.value))
       update_users()
       @mailing_list_box.focus
+      save_score()
+    end
+  end
+
+  def save_score()
+    if rating? then
+      File.open(@preferences.result_path, 'w') do |file|
+        @user_repo.users.each do |user|
+          file.puts(user.to_s(@preferences.delimiter))
+        end
+      end
     end
   end
 
@@ -360,6 +384,7 @@ class MainWindow
     execute_text = @execute_textsc.tk_text
     TkUtils.set_text_value(execute_text, result)
   end
+
 end
 
 MainWindow.instance.launch

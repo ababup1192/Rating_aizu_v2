@@ -10,9 +10,10 @@ class User
     @score = score
   end
 
-  def to_s
-    "#{@id} -> #{@score}"
+  def to_s(delimiter = ' -> ')
+    "#{@id}#{delimiter}#{@score}"
   end
+
 end
 
 # ユーザ全体を管理する
