@@ -246,7 +246,9 @@ class RatingPreferences
       }
       ok_button.command(
         proc{
-          MainWindow.instance.set_mailing_list_box(@ml_path)
+          main_window = MainWindow.instance
+          main_window.set_rating_label()
+          main_window.set_mailing_list_box(@ml_path)
           @dialog.close
         }
       )
@@ -280,17 +282,29 @@ class RatingPreferences
 
   def save_ml_path()
     @ml_path = Tk.getOpenFile
-    TkUtils.set_entry_value(@ml_path_entry, @ml_path)
+    if !@ml_path.empty? then
+      TkUtils.set_entry_value(@ml_path_entry, @ml_path)
+    else
+      @ml_path = nil
+    end
   end
 
   def save_rating_path()
     @rating_path = Tk.chooseDirectory(initialdir: @ml_path)
-    TkUtils.set_entry_value(@rating_path_entry, @rating_path)
+    if !@rating_path.empty? then
+      TkUtils.set_entry_value(@rating_path_entry, @rating_path)
+    else
+      @rating_path = nil
+    end
   end
 
   def save_result_path()
     @result_path = Tk.getSaveFile
-    TkUtils.set_entry_value(@result_entry, @result_path)
+    if !@result_path.empty?
+      TkUtils.set_entry_value(@result_entry, @result_path)
+    else
+      @result_path = nil
+    end
   end
 
 end

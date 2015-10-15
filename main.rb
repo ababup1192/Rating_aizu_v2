@@ -1,18 +1,28 @@
 # -*- coding: utf-8 -*-
 require 'tk'
 require 'singleton'
+require_relative 'user'
 require_relative 'preferences'
+require_relative 'command_select'
 require_relative 'rating'
+require_relative 'input'
 
 class MainWindow
   include Singleton
 
   # MainWindowの起動
   def launch
+    if !@init_flag then
+      @preferences = RatingPreferences.instance
+      @command_select = CommandSelect.instance
+      @input = Input.instance
+      @init_flag = true
+    end
+
     root = TkRoot.new{
       title 'Rating Aizu'
       resizable [0, 0]
-      geometry '820x540+150+150'
+      geometry '820x580+150+150'
     }
 
     # 設定ボタン + 警告ラベル
@@ -22,17 +32,19 @@ class MainWindow
 
     preferences_button = TkButton.new(top_frame){
       text '設定'
-      pack side: 'left'
+      pack side: 'top'
     }
     preferences = RatingPreferences.instance
     preferences_button.command(
       proc{preferences.launch(preferences_button)}
     )
 
-    preferences_label = TkLabel.new(top_frame){
-      text '採点の設定を行ってください。'
+    label_text = "採点の設定を行ってください。\n" +
+                     get_rating_preparation.to_s
+    @preferences_label = TkLabel.new(top_frame){
+      text label_text
       foreground 'red'
-      pack({side: 'left', padx: 20})
+      pack({side: 'top', padx: 20})
     }
 
     bottom_frame = TkFrame.new{
@@ -56,9 +68,14 @@ class MainWindow
 
     mail_scrollbar = TkScrollbar.new(mail_frame)
 
+    TkVariable
+
     @mailing_list_box = TkListbox.new(mail_frame){
       height 12
       yscrollbar mail_scrollbar
+      bind '<ListboxSelect>', proc {
+        p self.curselection
+      }
       pack side: 'left'
     }
 
@@ -142,8 +159,7 @@ class MainWindow
 
     combobox_var.trace("w", proc{ puts file_combobox.current })
 
-    file_combobox.values = ['hoge.c', 'hoge.h', 'in','out']
-    file_combobox.current = 0
+    file_combobox.values = []
 
     source_textsc = TkTextWithScrollbar.new(bottom_center_frame, 35, 24)
     source_text = source_textsc.tk_text
@@ -180,18 +196,69 @@ class MainWindow
   end
 
   def set_mailing_list_box(ml_path)
+    arr = []
     if !ml_path.nil? then
       File.open(ml_path) do |file|
         file.each_line do |line|
           line =~ /^(\w\d+)$/
           if !$1.nil?
-            # arr << $1
-            @mailing_list_box.insert('end', $1)
+            arr << $1
           end
         end
       end
+      if arr != @ml
+        @user_repo = UserRepository.new(arr)
+        @ml = arr
+
+        # 学生・成績 一覧に反映
+        @user_repo.users.each do |user|
+          @mailing_list_box.insert('end', user)
+        end
+
+      end
     end
   end
+
+  def get_rating_preparation
+    items = ['メーリングリスト', '採点対象ディレクトリ',
+             '採点対象ファイル', 'コンパイルコマンド', '実行コマンド',
+             '成績ファイル']
+    if !@preferences.ml_path.nil? then
+      items.delete_if {|item| item == 'メーリングリスト'}
+    end
+    if !@preferences.rating_path.nil? then
+      items.delete_if {|item| item == '採点対象ディレクトリ'}
+    end
+    if !@command_select.target_files.nil? then
+      items.delete_if {|item| item == '採点対象ファイル'}
+    end
+    if !@command_select.compile_command.nil? then
+      if !@command_select.compile_command.empty? then
+        items.delete_if {|item| item == 'コンパイルコマンド'}
+      end
+    end
+    if !@command_select.execute_command.nil?
+      if !@command_select.execute_command.empty? then
+        items.delete_if {|item| item == '実行コマンド'}
+      end
+    end
+    if !@preferences.result_path.nil?
+      items.delete_if {|item| item == '成績ファイル'}
+    end
+    items
+  end
+
+  def set_rating_label()
+    items = get_rating_preparation
+    if items.empty? then
+     @preferences_label.text = ''
+    else
+     label_text = "採点の設定を行ってください。\n" +
+                     get_rating_preparation.to_s
+     @preferences_label.text = label_text
+    end
+  end
+
 end
 
 MainWindow.instance.launch
