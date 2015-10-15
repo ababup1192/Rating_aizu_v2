@@ -90,15 +90,19 @@ class ExecuteManager
     # 実行コマンドのオブザーバーの生成
     execute_task = PostTask.new
     execute_task.register(:stdout) do |value|
-      puts '------execute------'
-      puts value
-      puts '--------end--------'
+      # puts '------execute------'
+      # puts value
+      # puts '--------end--------'
+      main_window = MainWindow.instance
+      main_window.set_execute_result(value)
     end
 
     execute_task.register(:stderr) do |reason|
-      puts '------execute------'
-      puts reason
-      puts '--------end--------'
+      # puts '------execute------'
+      # puts reason
+      # puts '--------end--------'
+      main_window = MainWindow.instance
+      main_window.set_execute_result(reason)
     end
 
     # 実行コマンド制御
@@ -107,17 +111,21 @@ class ExecuteManager
     # コンパイルコマンドのオブザーバーの生成
     compile_task = PostTask.new
     compile_task.register(:stdout) do |value|
-      puts '------compile------'
-      puts value
-      puts '--------end--------'
+      # puts '------compile------'
+      # puts value
+      # puts '--------end--------'
+      main_window = MainWindow.instance
+      main_window.set_compile_result(value)
 
       @executor.execute
     end
 
     compile_task.register(:stderr) do |reason|
-      puts '------compile------'
-      p reason
-      puts '--------end--------'
+      # puts '------compile------'
+      # p reason
+      # puts '--------end--------'
+      main_window = MainWindow.instance
+      main_window.set_compile_result(reason)
 
       @executor.execute
     end

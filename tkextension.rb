@@ -10,6 +10,15 @@ class TkUtils
       entry.state = 'readonly'
     end
   end
+
+  def self.set_text_value(textbox, value)
+    if !value.nil? then
+      textbox.state = 'normal'
+      textbox.value = value
+      textbox.state = 'disabled'
+    end
+  end
+
 end
 
 # オリジナルダイアログ

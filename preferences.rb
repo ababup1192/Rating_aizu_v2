@@ -249,6 +249,7 @@ class RatingPreferences
           main_window = MainWindow.instance
           main_window.set_rating_label()
           main_window.set_mailing_list_box(@ml_path)
+          main_window.set_rating()
           @dialog.close
         }
       )

@@ -53,6 +53,10 @@ class CommandSelect
 
       @file_entry = TkEntry.new(file_frame){
         width 20
+        bind 'Return', proc{
+          command_select = CommandSelect.instance
+          command_select.add_filelist()
+        }
         pack({side: 'left'})
       }
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'tk'
 require 'singleton'
+require_relative 'tkextension'
 require_relative 'user'
 require_relative 'preferences'
 require_relative 'command_select'
@@ -18,6 +19,7 @@ class MainWindow
       @preferences = RatingPreferences.instance
       @command_select = CommandSelect.instance
       @input = Input.instance
+      @manager = RatingManager.instance
       @init_flag = true
     end
 
@@ -70,7 +72,6 @@ class MainWindow
 
     mail_scrollbar = TkScrollbar.new(mail_frame)
 
-
     @mailing_list_box = TkListbox.new(mail_frame){
       height 12
       yscrollbar mail_scrollbar
@@ -78,6 +79,7 @@ class MainWindow
         main_window = MainWindow.instance
         main_window.set_score()
         main_window.set_filebox()
+        main_window.mark_next()
       }
       pack side: 'left'
     }
@@ -158,19 +160,20 @@ class MainWindow
 
     @file_combobox = TkCombobox.new(bottom_center_frame){
       textvariable combobox_var
+      state 'readonly'
       pack({side: 'top'})
     }
 
     combobox_var.trace("w", proc{
-      puts @file_combobox.current
+      set_source_text()
     })
 
     set_filebox()
 
-    source_textsc = TkTextWithScrollbar.new(bottom_center_frame, 35, 24)
-    source_text = source_textsc.tk_text
+    @source_textsc = TkTextWithScrollbar.new(bottom_center_frame, 35, 24)
+    source_text = @source_textsc.tk_text
     source_text.state = 'disabled'
-    source_textsc.pack
+    @source_textsc.pack
 
     # ==== 画面右 ====
     bottom_right_frame = TkFrame.new(bottom_frame){
@@ -183,20 +186,20 @@ class MainWindow
       pack({side: 'top'})
     }
 
-    compile_textsc = TkTextWithScrollbar.new(bottom_right_frame, 35, 5)
-    compile_text = compile_textsc.tk_text
+    @compile_textsc = TkTextWithScrollbar.new(bottom_right_frame, 35, 5)
+    compile_text = @compile_textsc.tk_text
     compile_text.state = 'disabled'
-    compile_textsc.pack
+    @compile_textsc.pack
 
     TkLabel.new(bottom_right_frame){
       text '実行結果'
       pack({side: 'top'})
     }
 
-    execute_textsc = TkTextWithScrollbar.new(bottom_right_frame, 35, 15)
-    execute_text = execute_textsc.tk_text
+    @execute_textsc = TkTextWithScrollbar.new(bottom_right_frame, 35, 15)
+    execute_text = @execute_textsc.tk_text
     execute_text.state = 'disabled'
-    execute_textsc.pack
+    @execute_textsc.pack
 
     Tk.mainloop
   end
@@ -294,7 +297,7 @@ class MainWindow
     if !target_files.nil? then
       user = @user_repo.users[@cur_index]
       target_files.map! do |file|
-        file.gsub!('$id', user.id)
+        file.gsub('$id', user.id)
       end
 
       @file_combobox.values = target_files
@@ -304,6 +307,59 @@ class MainWindow
     end
   end
 
+  def set_source_text()
+   source_text = @source_textsc.tk_text
+   if !@preferences.rating_path.nil? then
+      file_path = @preferences.rating_path + '/' +
+        @file_combobox.values[@file_combobox.current]
+      begin
+        File.open(file_path) do |file|
+          TkUtils.set_text_value(source_text, file.read)
+        end
+      rescue IOError => e
+        TkUtils.set_text_value(source_text, e.message + "ファイルがありません。")
+      rescue Errno::ENOENT => e
+        TkUtils.set_text_value(source_text, e.message + "ファイルがありません。")
+      rescue Errno::EISDIR => e
+        TkUtils.set_text_value(source_text, e.message + "ファイルがありません。")
+      end
+   else
+     TkUtils.set_text_value(source_text, 'ファイルがありません。')
+   end
+  end
+
+  def set_rating()
+    if get_rating_preparation().empty? then
+      target_files = @command_select.target_files
+      compile_command = @command_select.compile_command
+      execute_command = @command_select.execute_command
+
+      target_files.each_with_index do |file, index|
+        compile_command.gsub!("$#{index}", file)
+        execute_command.gsub!("$#{index}", file)
+      end
+
+      @manager.set_rating(@preferences.ml_path, @preferences.rating_path,
+                          target_files, compile_command, execute_command)
+    end
+  end
+
+  def mark_next()
+    if get_rating_preparation().empty? then
+      user = @user_repo.users[@cur_index]
+      @manager.mark_next(user.id)
+    end
+  end
+
+  def set_compile_result(result)
+    compile_text = @compile_textsc.tk_text
+    TkUtils.set_text_value(compile_text, result)
+  end
+
+  def set_execute_result(result)
+    execute_text = @execute_textsc.tk_text
+    TkUtils.set_text_value(execute_text, result)
+  end
 end
 
 MainWindow.instance.launch

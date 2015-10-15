@@ -97,6 +97,9 @@ class Rating
 
   # コンパイルと実行をする
   def execute
+    @manager.compile_command.gsub!('$id', @user_id)
+    @manager.execute_command.gsub!('$id', @user_id)
+
     @execute_manager = ExecuteManager.new(@execute_dir, @manager.compile_command,
                         @manager.execute_command, 3)
     @execute_manager.execute
@@ -109,18 +112,4 @@ class Rating
     @execute_manager.cancel
   end
 end
-
-# manager = RatingManager.instance
-# manager.set_rating('/Users/watanabemirai/Desktop/test/mail_list',
-#                    '/Users/watanabemirai/Desktop/test', ['hoge.c', 'in'],
-#                    'open .', 'echo hogehoge')
-
-# manager.mark_next('s1150253')
-# sleep 3
-# manager.mark_next('s1150254')
-# sleep 3
-# manager.mark_next('s1150255')
-# sleep 3
-# manager.exit
-# sleep 3
 
