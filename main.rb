@@ -10,6 +10,8 @@ require_relative 'input'
 class MainWindow
   include Singleton
 
+  attr_accessor :user_repo
+
   # MainWindowの起動
   def launch
     if !@init_flag then
@@ -68,13 +70,14 @@ class MainWindow
 
     mail_scrollbar = TkScrollbar.new(mail_frame)
 
-    TkVariable
 
     @mailing_list_box = TkListbox.new(mail_frame){
       height 12
       yscrollbar mail_scrollbar
       bind '<ListboxSelect>', proc {
-        p self.curselection
+        main_window = MainWindow.instance
+        main_window.set_score()
+        main_window.set_filebox()
       }
       pack side: 'left'
     }
@@ -91,17 +94,18 @@ class MainWindow
       pack({side: 'left'})
     }
 
-    score_entry = TkEntry.new(score_frame){
+    @score_entry = TkEntry.new(score_frame){
       width 5
       bind 'Return', proc{
-        @mailing_list_box.focus
+        main_window = MainWindow.instance
+        main_window.update_score()
       }
       pack({side: 'left', padx: 25})
     }
 
     @mailing_list_box.bind 'Return', proc{
-      score_entry.focus
-      score_entry.selection_range(0, 'end')
+      @score_entry.focus
+      @score_entry.selection_range(0, 'end')
     }
 
     # ショートカット
@@ -152,14 +156,16 @@ class MainWindow
     # ==== ソースコード表示 ====
     combobox_var = TkVariable.new
 
-    file_combobox = TkCombobox.new(bottom_center_frame){
+    @file_combobox = TkCombobox.new(bottom_center_frame){
       textvariable combobox_var
       pack({side: 'top'})
     }
 
-    combobox_var.trace("w", proc{ puts file_combobox.current })
+    combobox_var.trace("w", proc{
+      puts @file_combobox.current
+    })
 
-    file_combobox.values = []
+    set_filebox()
 
     source_textsc = TkTextWithScrollbar.new(bottom_center_frame, 35, 24)
     source_text = source_textsc.tk_text
@@ -219,6 +225,13 @@ class MainWindow
     end
   end
 
+  def update_users()
+    @mailing_list_box.clear
+    @user_repo.users.each do |user|
+      @mailing_list_box.insert('end', user)
+    end
+  end
+
   def get_rating_preparation
     items = ['メーリングリスト', '採点対象ディレクトリ',
              '採点対象ファイル', 'コンパイルコマンド', '実行コマンド',
@@ -256,6 +269,38 @@ class MainWindow
      label_text = "採点の設定を行ってください。\n" +
                      get_rating_preparation.to_s
      @preferences_label.text = label_text
+    end
+  end
+
+  def set_score()
+    if !@user_repo.nil? then
+      @cur_index = @mailing_list_box.curselection[0]
+      user = @user_repo.users[@cur_index]
+      @score_entry.value = user.score
+    end
+  end
+
+  def update_score()
+    if !@cur_index.nil?
+      user = @user_repo.users[@cur_index]
+      @user_repo.update_user!(User.new(user.id, @score_entry.value))
+      update_users()
+      @mailing_list_box.focus
+    end
+  end
+
+  def set_filebox()
+    target_files = Marshal.load(Marshal.dump(@command_select.target_files))
+    if !target_files.nil? then
+      user = @user_repo.users[@cur_index]
+      target_files.map! do |file|
+        file.gsub!('$id', user.id)
+      end
+
+      @file_combobox.values = target_files
+      @file_combobox.current = 0
+    else
+      @file_combobox.values = []
     end
   end
 

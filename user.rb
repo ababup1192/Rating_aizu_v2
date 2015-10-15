@@ -2,15 +2,16 @@
 
 # ユーザ(学生)。ユーザはIDと点数を持つ。
 class User
-  attr_accessor :id, :point
+  attr_accessor :id, :score
   # @param [String] id ユーザID(学籍番号)
-  def initialize(id)
+  # @param [Integer] score 点数
+  def initialize(id, score = 0)
     @id = id
-    @point = 0
+    @score = score
   end
 
   def to_s
-    "#{@id} -> #{@point}"
+    "#{@id} -> #{@score}"
   end
 end
 
