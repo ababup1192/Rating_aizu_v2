@@ -8,7 +8,7 @@ require_relative 'tkextension'
 class RatingPreferences
   include Singleton
 
-  attr_accessor :ml_path, :rating_path, :result_path
+  attr_accessor :ml_path, :rating_path, :result_path, :delimiter
 
   def launch(button)
     @dialog = Dialog.new(button, '採点設定', 470, 590){
@@ -145,39 +145,49 @@ class RatingPreferences
         pack({side: 'top', anchor: 'w', padx: 10, pady: 10})
       }
 
-      delimiter = TkVariable.new
-
       delimiter_frame = TkFrame.new(dialog){
         pack(side: 'top')
       }
 
+      delimiter_var = TkVariable.new
+
       comma_radio = TkRadioButton.new(delimiter_frame) {
         text 'カンマ'
         value 0
-        variable delimiter
+        variable delimiter_var
         pack(side: 'left')
       }
 
       tab_radio = TkRadioButton.new(delimiter_frame) {
         text 'タブ'
         value 1
-        variable delimiter
-        command proc{puts 'hoge'}
+        variable delimiter_var
         pack(side: 'left', padx: 5)
       }
 
-      TkRadioButton.new(delimiter_frame) {
+      any_radio = TkRadioButton.new(delimiter_frame) {
         text '任意の文字'
         value 2
-        variable delimiter
-        command proc{puts 'hoge'}
+        variable delimiter_var
         pack(side: 'left', padx: 5)
       }
+
+      any_delimiter_var = TkVariable.new
 
       any_delimiter = TkEntry.new(delimiter_frame){
         width 2
+        state 'readonly'
+        textvariable any_delimiter_var
         pack(side: 'left', padx: 3)
       }
+
+      delimiter_var.trace('w', proc {
+        if delimiter_var.value == '2' then
+          any_delimiter.state = 'normal'
+        else
+          any_delimiter.state = 'readonly'
+        end
+      })
 
       delimiter_entry = TkEntry.new(dialog){
         width 30
@@ -185,14 +195,46 @@ class RatingPreferences
         pack(side: 'top', pady: 10)
       }
 
+      any_delimiter_var.trace('w', proc{
+        preferences = RatingPreferences.instance
+        preferences.delimiter = any_delimiter.value
+        TkUtils.set_entry_value(delimiter_entry,
+                                "s1111111#{any_delimiter.value}100")
+      })
+
       comma_radio.command proc{
+        preferences = RatingPreferences.instance
+        preferences.delimiter = ', '
         TkUtils.set_entry_value(delimiter_entry, "s1111111, 100")
       }
       tab_radio.command proc{
+        preferences = RatingPreferences.instance
+        preferences.delimiter = '\t'
         TkUtils.set_entry_value(delimiter_entry, "s1111111\t100")
       }
-      comma_radio.select
-      comma_radio.invoke
+
+      # 区切り文字の読み込み
+      case @delimiter
+      when ', '
+        delimiter_var.value = 0
+        comma_radio.select
+        comma_radio.invoke
+      when '\t'
+        delimiter_var.value = 1
+        tab_radio.select
+        tab_radio.invoke
+      else
+        delimiter_var.value = 2
+        if !@delimiter.nil? then
+          any_delimiter.value = @delimiter
+          any_radio.select
+          any_radio.invoke
+        else
+          delimiter_var.value = 0
+          comma_radio.select
+          comma_radio.invoke
+        end
+      end
 
       button_frame = TkFrame.new(dialog){
         pack(side: 'top', pady: 5)

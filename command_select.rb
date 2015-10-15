@@ -8,7 +8,7 @@ class CommandSelect
   attr_accessor :target_files, :compile_command, :execute_command
 
   def launch(button)
-    if !@init_flag then
+    if @init_flag.nil? then
       @target_files = Array.new
       @tmp_arr = Array.new
       @init_flag = true
