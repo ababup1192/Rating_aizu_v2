@@ -81,27 +81,33 @@ class Rating
   def initialize(user_id, target_files)
     @user_id = user_id
     @uuid = SecureRandom.uuid
-    @target_files = target_files
-    @manager = RatingManager.instance
+
+    # 採点対象ファイル、コマンドにユーザIDが使われている場合は置換する。
+    @target_files = target_files.map do |file|
+      file.gsub('$id', @user_id)
+    end
+    manager = RatingManager.instance
+    @compile_command = manager.compile_command.gsub('$id', @user_id)
+    @execute_command = manager.execute_command.gsub('$id', @user_id)
     @execute_dir = '/tmp/rating-aizu/' + @uuid
     copy_targetfiles
   end
 
   # 採点対象ファイルを実行ディレクトリへコピーする
   def copy_targetfiles
-    FileUtils.mkdir_p(@execute_dir)
-    FileUtils.cp(@target_files, @execute_dir)
+    begin
+      FileUtils.mkdir_p(@execute_dir)
+      FileUtils.cp(@target_files, @execute_dir)
+    rescue Errno::ENOENT => e
+    end
   end
 
   private :copy_targetfiles
 
   # コンパイルと実行をする
   def execute
-    @manager.compile_command.gsub!('$id', @user_id)
-    @manager.execute_command.gsub!('$id', @user_id)
-
-    @execute_manager = ExecuteManager.new(@execute_dir, @manager.compile_command,
-                        @manager.execute_command, 3)
+    @execute_manager = ExecuteManager.new(@execute_dir, @compile_command,
+                        @execute_command, 3)
     @execute_manager.execute
   end
 
