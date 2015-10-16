@@ -125,7 +125,7 @@ class MainWindow
       pack({side: 'top', pady: 5})
     }
 
-    shortcut_entries = []
+    @shortcut_entries = []
 
     (1..4).each do |i|
       if i <= 2 then
@@ -137,7 +137,7 @@ class MainWindow
           width 5
           pack({side: 'left', padx: 5})
         }
-        shortcut_entries.push(shortcut_entry)
+        @shortcut_entries.push(shortcut_entry)
       else
         TkLabel.new(shortcut_frame2){
           text "F#{i}"
@@ -147,9 +147,11 @@ class MainWindow
           width 5
           pack({side: 'left', padx: 5})
         }
-        shortcut_entries.push(shortcut_entry)
+        @shortcut_entries.push(shortcut_entry)
       end
     end
+
+    @mailing_list_box.bind('Key', self.method(:push_shortcut))
 
     # ==== 画面中央 ====
     bottom_center_frame = TkFrame.new(bottom_frame){
@@ -296,13 +298,45 @@ class MainWindow
     end
   end
 
-  def update_score()
+  def update_score(score = nil)
     if !@cur_index.nil?
       user = @user_repo.users[@cur_index]
-      @user_repo.update_user!(User.new(user.id, @score_entry.value))
+      if score.nil? then
+        @user_repo.update_user!(User.new(user.id, @score_entry.value))
+      else
+        @user_repo.update_user!(User.new(user.id, score))
+      end
+
       update_users()
+      @mailing_list_box.selection_set(@cur_index)
       @mailing_list_box.focus
+      @mailing_list_box.activate(@cur_index)
       save_score()
+    end
+  end
+
+  def push_shortcut(e)
+    case e.keycode
+    when 67,   8058628
+      update_score(@shortcut_entries[0].value.to_i)
+    when 68,   7927557
+      update_score(@shortcut_entries[1].value.to_i)
+    when 69,   6551302
+      update_score(@shortcut_entries[2].value.to_i)
+    when 70,   7796487
+      update_score(@shortcut_entries[3].value.to_i)
+    when 8124162
+      target_files = @command_select.target_files
+      if !target_files.nil? then
+        @file_combobox.current =
+          (@file_combobox.current - 1) % target_files.length
+      end
+    when 8189699
+      target_files = @command_select.target_files
+      if !target_files.nil? then
+        @file_combobox.current =
+          (@file_combobox.current + 1) % target_files.length
+      end
     end
   end
 
@@ -362,7 +396,6 @@ class MainWindow
         compile_command.gsub!("$#{index}", file)
         execute_command.gsub!("$#{index}", file)
       end
-
       @manager.set_rating(@preferences.ml_path, @preferences.rating_path,
                           target_files, compile_command, execute_command)
     end
