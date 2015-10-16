@@ -102,7 +102,7 @@ class ExecuteManager
       # puts reason
       # puts '--------end--------'
       main_window = MainWindow.instance
-      main_window.set_execute_result(reason)
+      main_window.set_execute_err(reason)
     end
 
     # 実行コマンド制御
@@ -125,7 +125,7 @@ class ExecuteManager
       # p reason
       # puts '--------end--------'
       main_window = MainWindow.instance
-      main_window.set_compile_result(reason)
+      main_window.set_compile_err(reason)
 
       @executor.execute
     end

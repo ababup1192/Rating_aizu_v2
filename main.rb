@@ -375,14 +375,14 @@ class MainWindow
           TkUtils.set_text_value(source_text, file.read)
         end
       rescue IOError => e
-        TkUtils.set_text_value(source_text, e.message + "ファイルがありません。")
+        TkUtils.set_errtext(source_text, e.message)
       rescue Errno::ENOENT => e
-        TkUtils.set_text_value(source_text, e.message + "ファイルがありません。")
+        TkUtils.set_errtext(source_text, e.message)
       rescue Errno::EISDIR => e
-        TkUtils.set_text_value(source_text, e.message + "ファイルがありません。")
+        TkUtils.set_errtext(source_text, e.message)
       end
    else
-     TkUtils.set_text_value(source_text, 'ファイルがありません。')
+     TkUtils.set_errtext(source_text, 'ファイルがありません。')
    end
   end
 
@@ -413,11 +413,20 @@ class MainWindow
     TkUtils.set_text_value(compile_text, result)
   end
 
+  def set_compile_err(result)
+    compile_text = @compile_textsc.tk_text
+    TkUtils.set_errtext(compile_text, result)
+  end
+
   def set_execute_result(result)
     execute_text = @execute_textsc.tk_text
     TkUtils.set_text_value(execute_text, result)
   end
 
+  def set_execute_err(result)
+    execute_text = @execute_textsc.tk_text
+    TkUtils.set_errtext(execute_text, result)
+  end
 end
 
 MainWindow.instance.launch

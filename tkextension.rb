@@ -14,6 +14,16 @@ class TkUtils
   def self.set_text_value(textbox, value)
     if !value.nil? then
       textbox.state = 'normal'
+      textbox.foreground 'black'
+      textbox.value = value
+      textbox.state = 'disabled'
+    end
+  end
+
+  def self.set_errtext(textbox, value)
+    if !value.nil? then
+      textbox.state = 'normal'
+      textbox.foreground 'red'
       textbox.value = value
       textbox.state = 'disabled'
     end
