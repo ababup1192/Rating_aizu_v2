@@ -280,9 +280,9 @@ class MainWindow
   end
 
   def set_rating_label()
-    items = get_rating_preparation
-    if items.empty? then
-     @preferences_label.text = ''
+    if rating? then
+     @preferences_label.foreground = 'blue'
+     @preferences_label.text = '採点準備完了'
     else
      label_text = "採点の設定を行ってください。\n" +
                      get_rating_preparation.to_s
