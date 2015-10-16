@@ -43,13 +43,18 @@ class CommandExecutor
   # @param [String] command コマンド文字列
   # @param [PostTask] observer コマンド終了時処理
   # @param [Integer] time タイムアウト時間(秒)
-  def initialize(execute_dir, command, observer, time)
+  def initialize(execute_dir, command, observer, time, input_flag = false)
     @command = command
     @task = Concurrent::Future.new {
       timeout(time){
         out_r, out_w = IO.pipe
         err_r, err_w = IO.pipe
-        @pid = spawn @command, {out: out_w, err: err_w, chdir: execute_dir}
+        if input_flag
+          @pid = spawn @command, {in: execute_dir + '/input',
+                                  out: out_w, err: err_w, chdir: execute_dir}
+        else
+          @pid = spawn @command, {out: out_w, err: err_w, chdir: execute_dir}
+        end
         @thread = Process.detach(@pid)
         out_w.close
         err_w.close
@@ -86,34 +91,25 @@ class ExecuteManager
   # @param [String] compile_command コンパイルコマンド文字列
   # @param [String] execute_command 実行コマンド文字列
   # @param [Integer] time タイムアウト時間(秒)
-  def initialize(execute_dir, compile_command, execute_command, time)
+  def initialize(execute_dir, compile_command, execute_command, time, input_flag)
     # 実行コマンドのオブザーバーの生成
     execute_task = PostTask.new
     execute_task.register(:stdout) do |value|
-      # puts '------execute------'
-      # puts value
-      # puts '--------end--------'
       main_window = MainWindow.instance
       main_window.set_execute_result(value)
     end
 
     execute_task.register(:stderr) do |reason|
-      # puts '------execute------'
-      # puts reason
-      # puts '--------end--------'
       main_window = MainWindow.instance
       main_window.set_execute_err(reason)
     end
 
     # 実行コマンド制御
-    @executor = CommandExecutor.new(execute_dir, execute_command, execute_task, time)
+    @executor = CommandExecutor.new(execute_dir, execute_command, execute_task, time, input_flag)
 
     # コンパイルコマンドのオブザーバーの生成
     compile_task = PostTask.new
     compile_task.register(:stdout) do |value|
-      # puts '------compile------'
-      # puts value
-      # puts '--------end--------'
       main_window = MainWindow.instance
       main_window.set_compile_result(value)
 
@@ -121,9 +117,6 @@ class ExecuteManager
     end
 
     compile_task.register(:stderr) do |reason|
-      # puts '------compile------'
-      # p reason
-      # puts '--------end--------'
       main_window = MainWindow.instance
       main_window.set_compile_err(reason)
 

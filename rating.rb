@@ -7,8 +7,9 @@ require_relative 'user'
 class RatingManager
   include Singleton
 
-  attr_accessor :user_repo, :target_files,
-                  :compile_command, :execute_command, :current_rating
+  attr_accessor :user_repo, :target_files, :compile_command,
+    :execute_command, :current_rating, :input
+
 
   # 採点の初期設定を行う
   # @param [String] mailing_list_path メーリングリストのファイルパス
@@ -17,13 +18,14 @@ class RatingManager
   # @param [String] compile_command コンパイルコマンド
   # @param [String] execute_command 実行コマンド
   def set_rating(mailing_list_path, target_dir, target_files,
-                 compile_command, execute_command)
+                 compile_command, execute_command, input = nil)
     mailing_list = read_mailing_list(mailing_list_path)
     @user_repo = UserRepository.new(mailing_list)
     @target_files = target_files.map{ |file| target_dir + '/' + file }
     @compile_command = compile_command
     @execute_command = execute_command
     @current_rating = nil
+    @input = input
   end
 
   # メーリングリストを読み込み
@@ -81,6 +83,7 @@ class Rating
   def initialize(user_id, target_files)
     @user_id = user_id
     @uuid = SecureRandom.uuid
+    @input_flag = false
 
     # 採点対象ファイル、コマンドにユーザIDが使われている場合は置換する。
     @target_files = target_files.map do |file|
@@ -90,24 +93,32 @@ class Rating
     @compile_command = manager.compile_command.gsub('$id', @user_id)
     @execute_command = manager.execute_command.gsub('$id', @user_id)
     @execute_dir = '/tmp/rating-aizu/' + @uuid
-    copy_targetfiles
+    copy_targetfiles()
+    add_inputfile()
   end
 
   # 採点対象ファイルを実行ディレクトリへコピーする
-  def copy_targetfiles
+  def copy_targetfiles()
     begin
       FileUtils.mkdir_p(@execute_dir)
       FileUtils.cp(@target_files, @execute_dir)
     rescue Errno::ENOENT => e
     end
   end
-
   private :copy_targetfiles
+
+  def add_inputfile()
+    manager = RatingManager.instance
+    if !manager.input.nil? then
+      File.write(@execute_dir + '/input',  manager.input)
+      @input_flag = true
+    end
+  end
 
   # コンパイルと実行をする
   def execute
     @execute_manager = ExecuteManager.new(@execute_dir, @compile_command,
-                        @execute_command, 3)
+                        @execute_command, 3, @input_flag)
     @execute_manager.execute
   end
 

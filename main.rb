@@ -397,7 +397,8 @@ class MainWindow
         execute_command.gsub!("$#{index}", file)
       end
       @manager.set_rating(@preferences.ml_path, @preferences.rating_path,
-                          target_files, compile_command, execute_command)
+                          target_files, compile_command, execute_command,
+                          @input.value)
     end
   end
 
