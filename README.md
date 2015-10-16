@@ -1,7 +1,14 @@
 # Rating_aizu_v2
 採点ツール
 
-    $ bundle install --path vendor/bundle # ライブラリのインストール。初回のみ。
-    $ bundle exec ruby main.rb
-    
-    
+## 起動方法
+
+    $ bash rating.sh&
+
+## Rdoc
+
+doc/index.html
+
+## UML
+
+https://github.com/ababup1192/Rating_aizu_v2/blob/master/uml/Rating_aizu_uml.pdf
