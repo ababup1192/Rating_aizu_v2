@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'concurrent'
 require 'timeout'
-require 'open4'
 
 # コマンド実行後の処理をするためのObserver
 class PostTask
