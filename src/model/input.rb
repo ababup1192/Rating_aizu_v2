@@ -12,7 +12,14 @@ class Input
     @value = value
   end
 
+  # 入力があるかどうか。
+  def empty?
+    @value.nil?
+  end
+
+  # 採点可能かどうか。
   def rating?
-    !@value.nil?
+    # 標準入力は必須ではないので、常にtrue
+    true
   end
 end
