@@ -2,9 +2,13 @@
 
 # 実行時の標準入力を管理。
 class Input
-  attr_reader :value
-  def initialize(input_view)
+  attr_reader :name, :value
+  def initialize
+    @name = '標準入力'
     @input = nil
+  end
+
+  def add_observer(input_view)
     input_view.add_observer(self)
   end
 
