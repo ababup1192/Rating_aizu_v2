@@ -31,12 +31,13 @@ class PostTask
       stderr = value[:stderr]
       success = value[:success]
 
-      # 正常時のブロック呼び出し。
+      # 結果がなく、Statusがおかしいときエラー落ち。
       if stdout.empty? && stderr.empty? && !success
         @events[:stderr].call('エラー終了しました。')
+      # エラーがあるときはそれを表示。
       elsif !stderr.empty? then
         @events[:stderr].call(stderr)
-      # エラー時のブロック呼び出し。
+      # それ以外は正常。
       else
         @events[:stdout].call(stdout)
       end
