@@ -84,14 +84,16 @@ class TkTextWithScrollbar
   # @param [TkFrame] parent_frame 設置元
   # @param [Integer] width テキストボックスの幅
   # @param [Integer] height テキストボックスの高さ
-  def initialize(parent_frame, width, height)
+  def initialize(parent_frame, width, height, text_value = '', state = 'normal')
     @frame = TkFrame.new(parent_frame)
 
     @tk_text = TkText.new(@frame){
       width width
       height height
+      state state
       yscrollbar @scrollbar
     }
+    set_text(text_value)
 
     @scrollbar = TkScrollbar.new(@frame)
   end
@@ -100,6 +102,23 @@ class TkTextWithScrollbar
     @frame.pack({side: 'top', pady: 15})
     @tk_text.pack({'side' => 'left'})
     @scrollbar.pack({side: 'right', fill: :y})
+  end
+
+  def get_text
+    @tk_text.value
+  end
+
+  def set_text(value)
+    if !value.nil?
+      if @tk_text.state == 'normal' then
+        @tk_text.value = value
+      # disabledの場合は、テキストを挿入してから状態を戻す。
+      else
+        @tk_text.state = 'normal'
+        @tk_text.value = value
+        @tk_text.state = 'disabled'
+      end
+    end
   end
 end
 
