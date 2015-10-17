@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'concurrent'
 require 'timeout'
+require 'open4'
 
 # コマンド実行後の処理をするためのObserver
 class PostTask
@@ -26,12 +27,18 @@ class PostTask
         raise 'Please register stdout and stderr events.'
       end
 
+      stdout = value[:stdout]
+      stderr = value[:stderr]
+      success = value[:success]
+
       # 正常時のブロック呼び出し。
-      if reason.nil? then
-        @events[:stdout].call(value)
+      if stdout.empty? && stderr.empty? && !success
+        @events[:stderr].call('エラー終了しました。')
+      elsif !stderr.empty? then
+        @events[:stderr].call(stderr)
       # エラー時のブロック呼び出し。
       else
-        @events[:stderr].call(reason)
+        @events[:stdout].call(stdout)
       end
     end
 end
@@ -49,16 +56,20 @@ class CommandExecutor
       timeout(time){
         out_r, out_w = IO.pipe
         err_r, err_w = IO.pipe
-        if input_flag
-          @pid = spawn @command, {in: execute_dir + '/input',
-                                  out: out_w, err: err_w, chdir: execute_dir}
+
+        if input_flag then
+          @pid = spawn @command, {in: execute_dir + '/input', out: out_w,
+                                   err: err_w, chdir: execute_dir}
         else
           @pid = spawn @command, {out: out_w, err: err_w, chdir: execute_dir}
         end
+
         @thread = Process.detach(@pid)
+        _, status = Process.wait2(@pid)
+
         out_w.close
         err_w.close
-        out_r.read
+        {stdout: out_r.read, stderr: err_r.read, success: status.success?}
       }
     }
     @task.add_observer(observer)
@@ -95,13 +106,17 @@ class ExecuteManager
     # 実行コマンドのオブザーバーの生成
     execute_task = PostTask.new
     execute_task.register(:stdout) do |value|
-      main_window = MainWindow.instance
-      main_window.set_execute_result(value)
+      if !value.empty?
+        main_window = MainWindow.instance
+        main_window.set_execute_result(value)
+      end
     end
 
     execute_task.register(:stderr) do |reason|
-      main_window = MainWindow.instance
-      main_window.set_execute_err(reason)
+      if !reason.empty?
+        main_window = MainWindow.instance
+        main_window.set_execute_err(reason)
+      end
     end
 
     # 実行コマンド制御
@@ -110,16 +125,18 @@ class ExecuteManager
     # コンパイルコマンドのオブザーバーの生成
     compile_task = PostTask.new
     compile_task.register(:stdout) do |value|
-      main_window = MainWindow.instance
-      main_window.set_compile_result(value)
-
+      if !value.empty?
+        main_window = MainWindow.instance
+        main_window.set_compile_result(value)
+      end
       @executor.execute
     end
 
     compile_task.register(:stderr) do |reason|
-      main_window = MainWindow.instance
-      main_window.set_compile_err(reason)
-
+      if !reason.empty?
+        main_window = MainWindow.instance
+        main_window.set_compile_err(reason)
+      end
       @executor.execute
     end
 
