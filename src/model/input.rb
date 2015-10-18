@@ -5,7 +5,7 @@ class Input
   attr_reader :name, :value
   def initialize
     @name = '標準入力'
-    @input = nil
+    @value = nil
   end
 
   def add_observer(input_view)

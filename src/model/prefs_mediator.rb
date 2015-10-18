@@ -20,8 +20,8 @@ class PreferencesMediator
     result_file = ResultFile.new
     delimiter = Delimiter.new
 
-    @prefs = {input: input, malinglist: mailinglist,
-              rating_dir: rating_dir, input: input,
+    @prefs = {input: input, malinglist: mailinglist, rating_dir: rating_dir,
+              command_select: command_select,  input: input,
               result_file: result_file, delimiter: delimiter}
   end
 
@@ -32,7 +32,7 @@ class PreferencesMediator
 
   # 未設定のものの名前を集める
   def get_nonset_prefs_name
-    get_nonset_prefs.values.map{ |pref| pref.name }
+    get_nonset_prefs.values.map{ |pref| pref.name }.flatten
   end
 
   def rating?
