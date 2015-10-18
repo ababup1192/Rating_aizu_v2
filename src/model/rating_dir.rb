@@ -1,21 +1,29 @@
 # -*- coding: utf-8 -*-
+require 'observer'
+require_relative 'changing_observer'
 
 # 採点対象ディレクトリを管理。
 class RatingDir
+  include ChangingObserver
   attr_reader :name, :value
-  def initialize
+
+  def initialize(prefs)
+    @observer = prefs
+    add_observer(prefs)
+
     @name = '採点対象ディレクトリ'
     @value = nil
-  end
-
-  def add_observer(prefs)
-    prefs.add_observer(self)
   end
 
   def update(hash)
     if hash.has_key?(:rating_dir)
       @value = value[:rating_dir]
     end
+  end
+
+  def save_value()
+    changed
+    notify_observers(rating_dir: self)
   end
 
   # 入力があるかどうか。
