@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'observer'
-require_relative 'changing_observer'
+require_relative '../util/changing_observer'
 
 # 採点対象ディレクトリを管理。
 class RatingDir

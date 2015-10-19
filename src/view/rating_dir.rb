@@ -10,7 +10,7 @@ module View
       add_observer(rating_dir)
 
       @label = TkLabel.new(dialog){
-        text '"採点対象"ディレクトリの場所:'
+        text '"採点対象ディレクトリ"の場所:'
       }
 
       @frame = TkFrame.new(dialog)

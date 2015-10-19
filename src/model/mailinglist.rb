@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'observer'
-require_relative 'changing_observer'
+require_relative '../util/changing_observer'
 
 # ユーザの一覧を管理。
 class Mailinglist

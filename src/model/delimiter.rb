@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'observer'
-require_relative 'changing_observer'
+require_relative '../util/changing_observer'
 
 # 区切り文字を管理。
 class Delimiter
