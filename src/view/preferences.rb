@@ -80,6 +80,8 @@ module View
         View::RatingDir.new(dialog, prefs.value[:rating_dir]).pack()
 
         # 区切り文字
+        View::Delimiter.new(dialog, prefs.value[:delimiter]).pack()
+
         button_frame = TkFrame.new(dialog){
           pack(side: 'top', pady: 5)
         }

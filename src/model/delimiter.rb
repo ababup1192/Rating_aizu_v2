@@ -15,10 +15,8 @@ class Delimiter
     @value = ','
   end
 
-  def update(hash)
-    if hash.has_key?(:delimiter)
-      @value = value[:delimiter]
-    end
+  def update(value)
+    @value = value
   end
 
   def save_value()

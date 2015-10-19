@@ -15,69 +15,76 @@ module View
 
       @frame = TkFrame.new(dialog)
 
-      @delimiter_var = TkVariable.new
+      delimiter_var = TkVariable.new
 
       @comma_radio = TkRadioButton.new(@frame) {
         text 'カンマ'
         value 0
-        variable @delimiter_var
+        variable delimiter_var
       }
 
       @tab_radio = TkRadioButton.new(@frame) {
         text 'タブ'
         value 1
-        variable @delimiter_var
+        variable delimiter_var
       }
 
       @any_radio = TkRadioButton.new(@frame) {
         text '任意の文字'
         value 2
-        variable @delimiter_var
+        variable delimiter_var
       }
 
-      @any_delimiter_var = TkVariable.new
+      any_delimiter_var = TkVariable.new
 
       @delimiter_entry = TkEntry.new(@frame){
         width 2
         state 'readonly'
-        textvariable @any_delimiter_var
+        textvariable any_delimiter_var
       }
-
-      @delimiter_var.trace('w',  proc {
-        if @delimiter_var.value == '2' then
-          @delimiter_entry.state = 'normal'
-        else
-          @delimiter_entry.state = 'readonly'
-        end
-      })
 
       @preview_entry = TkEntry.new(dialog){
         width 30
         state 'readonly'
       }
 
+      # 区切り文字が入力されたときの処理
       any_delimiter_var.trace('w',  proc{
-        preferences = RatingPreferences.instance
-        preferences.delimiter = any_delimiter.value
-        TkUtils.set_entry_value(delimiter_entry,
-                                "s1111111#{any_delimiter.value}100")
+        save_value(@delimiter_entry.value)
+        TkUtils.set_entry_value(@preview_entry,
+                                "s1111111#{@delimiter_entry.value}100")
+      })
+
+      # ラジオボタンが押されたときの処理
+      delimiter_var.trace('w',  proc {
+        # 任意の区切り文字を選択したとき
+        if delimiter_var.value == '2' then
+          @delimiter_entry.value = ''
+          @delimiter_entry.state = 'normal'
+        else
+          @delimiter_entry.state = 'readonly'
+        end
       })
 
       @comma_radio.command proc{
-        preferences = RatingPreferences.instance
-        preferences.delimiter = ',  '
-        TkUtils.set_entry_value(delimiter_entry,  "s1111111,  100")
+        save_value(',')
+        TkUtils.set_entry_value(@preview_entry, "s1111111,100")
       }
 
       @tab_radio.command proc{
-        preferences = RatingPreferences.instance
-        preferences.delimiter = '\t'
-        TkUtils.set_entry_value(delimiter_entry,  "s1111111\t100")
+        save_value("\t")
+        TkUtils.set_entry_value(@preview_entry, "s1111111\t100")
+      }
+
+      @any_radio.command proc{
+        save_value(@delimiter_entry.value)
+        TkUtils.set_entry_value(@preview_entry,
+                                "s1111111#{@delimiter_entry.value}100")
       }
 
       # 区切り文字の読み込み
       case delimiter.value
-      when ',  '
+      when ','
         delimiter_var.value = 0
         @comma_radio.select
         @comma_radio.invoke
@@ -88,7 +95,7 @@ module View
       else
         delimiter_var.value = 2
         if !@delimiter.nil? then
-          any_delimiter.value = @delimiter
+          @delimiter_entry.value = delimiter.value
           @any_radio.select
           @any_radio.invoke
         else
@@ -97,7 +104,6 @@ module View
           @comma_radio.invoke
         end
       end
-
     end
 
     def pack()
@@ -106,13 +112,11 @@ module View
       @comma_radio.pack(side: 'left')
       @tab_radio.pack(side: 'left',  padx: 5)
       @any_radio.pack(side: 'left',  padx: 5)
-      @entry.pack(side: 'left',  padx: 3)
+      @delimiter_entry.pack(side: 'left',  padx: 3)
       @preview_entry.pack(side: 'top',  pady: 10)
-      @button.pack({side: 'left', padx: 15})
     end
 
-    def save_value()
-
+    def save_value(value)
       changed
       notify_observers(value)
     end
