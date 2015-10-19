@@ -22,7 +22,7 @@ class CommandSelect
   def update_name()
     names = ['採点対象ファイル', 'コンパイルコマンド', '実行コマンド']
     # ハッシュから値がnil(未設定)のものを取得
-    args = @value.values.map.with_index{ |v, index| v.nil? ? index : nil }.
+    args = @value.values.map.with_index{ |v, index| v.nil? || v.empty? ? index : nil }.
       select{ |v| !v.nil? }
     # 未設定のものの名前をnameとしてupdate
     @name = names.values_at(*args)
@@ -36,6 +36,6 @@ class CommandSelect
   # 採点可能かどうか。
   def rating?
     # 全ての値が必須。
-    @value.values.select{ |v| v.nil?}.length == 0
+    @value.values.select{ |v| v.nil? || v.empty? }.length == 0
   end
 end

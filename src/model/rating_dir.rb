@@ -31,6 +31,6 @@ class RatingDir
 
   # 採点可能かどうか。
   def rating?
-    empty?
+    !empty?
   end
 end

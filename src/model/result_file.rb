@@ -15,15 +15,13 @@ class ResultFile
     @value = nil
   end
 
-  def update(hash)
-    if hash.has_key?(:result_file)
-      @value = value[:result_file]
-    end
+  def update(value)
+      @value = value
   end
 
   def save_value()
     changed
-    notify_observers(result: self)
+    notify_observers(result_file: self)
   end
 
   # 入力があるかどうか。
@@ -33,6 +31,6 @@ class ResultFile
 
   # 採点可能かどうか。
   def rating?
-    empty?
+    !empty?
   end
 end

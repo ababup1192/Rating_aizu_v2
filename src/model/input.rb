@@ -12,7 +12,7 @@ class Input
     add_observer(prefs)
 
     @name = '標準入力'
-    @value = value
+    @value = nil
   end
 
   def update(value)

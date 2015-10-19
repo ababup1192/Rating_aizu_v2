@@ -10,7 +10,7 @@ module View
       add_observer(rating_dir)
 
       @label = TkLabel.new(dialog){
-        text '成績ファイル:'
+        text '"採点対象"ディレクトリの場所:'
       }
 
       @frame = TkFrame.new(dialog)
@@ -19,6 +19,7 @@ module View
         width 40
         state 'readonly'
       }
+      TkUtils.set_entry_value(@entry, rating_dir.value)
 
       @button = TkButton.new(@frame){
         text '変更'
@@ -34,7 +35,7 @@ module View
     end
 
     def save_value()
-      value = Tk.getSaveFile
+      value = Tk.chooseDirectory
       if !value.empty? then
         TkUtils.set_entry_value(@entry,  value)
       else

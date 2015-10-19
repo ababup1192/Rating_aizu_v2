@@ -39,7 +39,7 @@ class PreferencesMediator
 
   # 未設定のものを集める
   def get_notset_prefs
-    @prefs.select{ |k, v| v.rating? == true }
+    @prefs.select{ |k, v| v.rating? == false }
   end
 
   # 未設定のものの名前を集める

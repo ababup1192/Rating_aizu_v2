@@ -14,9 +14,9 @@ class MainWindow
 
   # MainWindowの起動
   def launch
-    @prefs = Preferences.new
+    # 設定を最初に作っておく
+    Preferences.new
     @mediator = PreferencesMediator.instance
-    # @mediator.load_prefs(@prefs)
 
     root = TkRoot.new{
       title 'Rating Aizu'
@@ -36,17 +36,15 @@ class MainWindow
 
     preferences_button.command(
       proc{
-        View::Preferences.new(preferences_button, @prefs).launch()
+        View::Preferences.new(preferences_button, Preferences.new).launch()
       }
     )
 
-    label_text = "採点の設定を行ってください。\n" +
-                     @mediator.get_notset_prefs_name.join(', ')
     @preferences_label = TkLabel.new(top_frame){
-      text label_text
       foreground 'red'
       pack({side: 'top', padx: 20})
     }
+    set_preferences_label()
 
     bottom_frame = TkFrame.new{
       pack({side: 'left', pady: 15})
@@ -205,6 +203,7 @@ class MainWindow
   end
 
   def set_mailing_list_box(ml_path)
+=begin
     arr = []
     if !ml_path.nil? then
       File.open(ml_path) do |file|
@@ -226,6 +225,7 @@ class MainWindow
 
       end
     end
+=end
   end
 
   def update_users()
@@ -244,6 +244,7 @@ class MainWindow
   end
 
   def get_rating_preparation
+=begin
     items = ['メーリングリスト', '採点対象ディレクトリ',
              '採点対象ファイル', 'コンパイルコマンド', '実行コマンド',
              '成績ファイル']
@@ -270,19 +271,16 @@ class MainWindow
       items.delete_if {|item| item == '成績ファイル'}
     end
     items
+=end
   end
 
-  def rating?
-    get_rating_preparation.empty?
-  end
-
-  def set_rating_label()
-    if rating? then
+  def set_preferences_label()
+    if @mediator.rating? then
      @preferences_label.foreground = 'blue'
      @preferences_label.text = '採点準備完了'
     else
      label_text = "採点の設定を行ってください。\n" +
-                     get_rating_preparation.to_s
+       @mediator.get_notset_prefs_name.join(', ')
      @preferences_label.text = label_text
     end
   end
@@ -402,7 +400,7 @@ class MainWindow
   end
 
   def mark_next()
-    if get_rating_preparation().empty? then
+    if @mediator.rating? then
       user = @user_repo.users[@cur_index]
       @manager.mark_next(user.id)
     end

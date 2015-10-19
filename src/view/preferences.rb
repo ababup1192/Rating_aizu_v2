@@ -37,17 +37,17 @@ module View
 
         @compile_command_entry = TkEntry.new(command_frame){
           width 40
-          text prefs.value[:command_select].value[:compile_command]
           state 'readonly'
           pack({side: 'left'})
         }
 
         @execute_command_entry = TkEntry.new(dialog){
           width 40
-          text prefs.value[:command_select].value[:execute_command]
           state 'readonly'
           pack({side: 'top', anchor: 'w', padx: 27})
         }
+
+        set_commands(prefs.value[:command_select].value)
 
         command_button = TkButton.new(command_frame){
           text '変更'
@@ -77,7 +77,7 @@ module View
         })
 
         # 成績ファイル
-        View::RatingDir.new(dialog, prefs.value[:rating_dir]).pack()
+        View::ResultFile.new(dialog, prefs.value[:result_file]).pack()
 
         # 区切り文字
         View::Delimiter.new(dialog, prefs.value[:delimiter]).pack()
@@ -93,9 +93,9 @@ module View
         ok_button.command(
           proc{
             main_window = MainWindow.instance
-            main_window.set_rating_label()
-            main_window.set_mailing_list_box(@ml_path)
-            main_window.set_rating()
+            main_window.set_preferences_label()
+            # main_window.set_mailing_list_box(@ml_path)
+            # main_window.set_rating()
             @dialog.close
           }
         )
@@ -118,9 +118,13 @@ module View
       @dialog.close
     end
 
-    def update(value)
+    def set_commands(value)
       TkUtils.set_entry_value(@compile_command_entry, value[:compile_command])
       TkUtils.set_entry_value(@execute_command_entry, value[:execute_command])
+    end
+
+    def update(value)
+      set_commands(value)
     end
   end
 end

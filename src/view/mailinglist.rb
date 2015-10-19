@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'observer'
 require 'tk'
+require_relative '../util/tkextension'
 
 module View
   class Mailinglist
@@ -17,9 +18,9 @@ module View
 
       @entry = TkEntry.new(@frame){
         width 40
-        text mailinglist.value
         state 'readonly'
       }
+      TkUtils.set_entry_value(@entry, mailinglist.value)
 
       @button = TkButton.new(@frame){
         text '変更'
