@@ -6,6 +6,7 @@ require_relative 'changing_observer'
 class Mailinglist
   include ChangingObserver
   attr_reader :name, :value
+
   def initialize(prefs)
     @observer = prefs
     add_observer(prefs)
@@ -14,21 +15,14 @@ class Mailinglist
     @value = nil
   end
 
-  def add_observer(prefs)
-    prefs.add_observer(self)
-  end
-
-  def update(hash)
-    if hash.has_key?(:mailinglist)
-      @value = value[:mailinglist]
-    end
+  def update(value)
+    @value = value
   end
 
   def save_value()
     changed
-    notify_observers(mailinglist: value)
+    notify_observers(mailinglist: self)
   end
-
 
   # 入力があるかどうか。
   def empty?

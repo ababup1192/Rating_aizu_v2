@@ -6,7 +6,7 @@ module ChangingObserver
 
   # 古いオブザーバを削除し、新しいオブザーバに変える。
   def change_observer!(new_observer)
-    delete_observers(@observer)
+    delete_observers
     add_observer(new_observer)
     @observer = new_observer
   end

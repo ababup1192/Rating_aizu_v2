@@ -15,8 +15,7 @@ class CommandSelect
   end
 
   def update(value)
-    # 対象のものだけハッシュから取り出してマージ
-    @value = @value.merge(value.select{ |k, v| @value.keys.include?(k) })
+    @value = @value.merge(value)
     update_name()
   end
 

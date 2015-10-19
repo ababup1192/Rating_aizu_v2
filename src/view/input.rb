@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 require 'observer'
 require 'tk'
-require_relative '../tkextension'
+require_relative '../util/tkextension'
 
 module View
   class Input
     include Observable
 
-    def initialize(button, value)
+    def initialize(button, input)
+      add_observer(input)
+
       @dialog = Dialog.new(button, '入力データの設定', 450, 400){
         dialog = @dialog.dialog
 
-        @input_textsc = TkTextWithScrollbar.new(dialog, 50, 20, value)
+        @input_textsc = TkTextWithScrollbar.new(dialog, 50, 20, input.value)
         @input_textsc.pack
 
         button_frame = TkFrame.new(dialog){
@@ -43,21 +45,3 @@ module View
     end
   end
 end
-
-=begin
-root = TkRoot.new{
-  title 'Rating Aizu'
-  resizable [0, 0]
-  geometry '100x100+150+150'
-}
-
-button = TkButton.new{
-    text 'push'
-    command proc{
-      View::Input.new(button, 'aaaaa').launch
-    }
-    pack
-}
-
-Tk.mainloop
-=end

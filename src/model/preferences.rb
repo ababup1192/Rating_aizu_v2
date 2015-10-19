@@ -5,21 +5,22 @@ require_relative 'prefs_mediator'
 # 採点設定
 class Preferences
   include Observable
+  attr_reader :value
 
   def initialize
     mediator = PreferencesMediator.instance
     add_observer(mediator)
-    @prefs = mediator.load_prefs
+    @value = mediator.load_prefs(self)
   end
 
   # 設定を反映
   def update(pref)
-    @prefs = @prefs.merge(pref)
+    @value = @value.merge(pref)
   end
 
   # 設定を保存
   def save_prefs()
     changed
-    notify_observers(@prefs)
+    notify_observers(@value)
   end
 end

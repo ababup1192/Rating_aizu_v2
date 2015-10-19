@@ -15,10 +15,8 @@ class RatingDir
     @value = nil
   end
 
-  def update(hash)
-    if hash.has_key?(:rating_dir)
-      @value = value[:rating_dir]
-    end
+  def update(value)
+    @value = value
   end
 
   def save_value()

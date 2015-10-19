@@ -24,12 +24,12 @@ class PreferencesMediator
       result_file = ResultFile.new(observer)
       delimiter = Delimiter.new(observer)
 
-      @prefs = {input: input, malinglist: mailinglist, rating_dir: rating_dir,
+      @prefs = {mailinglist: mailinglist, rating_dir: rating_dir,
                 command_select: command_select,  input: input,
                 result_file: result_file, delimiter: delimiter}
     end
     new_prefs = @prefs.clone
-    new_prefs.each{ |pref| pref.change_observer!(observer) }
+    new_prefs.values.each{ |pref| pref.change_observer!(observer) }
     new_prefs
   end
 
@@ -43,8 +43,8 @@ class PreferencesMediator
   end
 
   # 未設定のものの名前を集める
-  def get_nonset_prefs_name
-    get_nonset_prefs.values.map{ |pref| pref.name }.flatten
+  def get_notset_prefs_name
+    get_notset_prefs.values.map{ |pref| pref.name }.flatten
   end
 
   def rating?

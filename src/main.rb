@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 require 'tk'
 require 'singleton'
-require_relative 'tkextension'
-require_relative 'user'
-require_relative 'preferences'
-require_relative 'command_select'
-require_relative 'rating'
-require_relative 'input'
+require_relative 'util/tkextension'
+require_relative 'model/user'
+require_relative 'model/prefs_mediator'
+require_relative 'model/preferences'
+require_relative 'view/preferences'
 
 class MainWindow
   include Singleton
@@ -15,13 +14,9 @@ class MainWindow
 
   # MainWindowの起動
   def launch
-    if !@init_flag then
-      @preferences = RatingPreferences.instance
-      @command_select = CommandSelect.instance
-      @input = Input.instance
-      @manager = RatingManager.instance
-      @init_flag = true
-    end
+    @prefs = Preferences.new
+    @mediator = PreferencesMediator.instance
+    # @mediator.load_prefs(@prefs)
 
     root = TkRoot.new{
       title 'Rating Aizu'
@@ -38,13 +33,15 @@ class MainWindow
       text '設定'
       pack side: 'top'
     }
-    preferences = RatingPreferences.instance
+
     preferences_button.command(
-      proc{preferences.launch(preferences_button)}
+      proc{
+        View::Preferences.new(preferences_button, @prefs).launch()
+      }
     )
 
     label_text = "採点の設定を行ってください。\n" +
-                     get_rating_preparation.to_s
+                     @mediator.get_notset_prefs_name.join(', ')
     @preferences_label = TkLabel.new(top_frame){
       text label_text
       foreground 'red'
@@ -351,6 +348,7 @@ class MainWindow
   end
 
   def set_filebox()
+=begin
     target_files = Marshal.load(Marshal.dump(@command_select.target_files))
     if !target_files.nil? then
       user = @user_repo.users[@cur_index]
@@ -363,6 +361,7 @@ class MainWindow
     else
       @file_combobox.values = []
     end
+=end
   end
 
   def set_source_text()
@@ -428,6 +427,10 @@ class MainWindow
     execute_text = @execute_textsc.tk_text
     TkUtils.set_errtext(execute_text, result)
   end
+
+  def launch_preferences()
+  end
+
 end
 
 MainWindow.instance.launch
