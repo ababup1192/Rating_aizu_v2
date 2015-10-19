@@ -10,7 +10,7 @@ class CommandSelect
   def initialize(prefs)
     @observer = prefs
     @name = ['採点対象ファイル', 'コンパイルコマンド', '実行コマンド']
-    @value = {target_files: nil, compile_command: nil,
+    @value = {target_files: [], compile_command: nil,
               execute_command: nil}
   end
 

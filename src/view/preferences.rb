@@ -56,7 +56,7 @@ module View
 
         command_button.command(
           proc{
-            View::CommandSelect.new(command_button,
+            View::CommandSelect.new(self, command_button,
                                     prefs.value[:command_select]).launch()
           }
         )
@@ -114,6 +114,11 @@ module View
       changed
       notify_observers(@input_textsc.get_text)
       @dialog.close
+    end
+
+    def update(value)
+      TkUtils.set_entry_value(@compile_command_entry, value[:compile_command])
+      TkUtils.set_entry_value(@execute_command_entry, value[:execute_command])
     end
   end
 end

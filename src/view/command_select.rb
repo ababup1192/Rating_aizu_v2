@@ -7,12 +7,18 @@ module View
   class CommandSelect
     include Observable
 
-    def initialize(button, command_select)
+    def initialize(parent_view, button, command_select)
+      add_observer(command_select)
+      add_observer(parent_view)
+
+      @target_files = command_select.value[:target_files]
+
+      # コマンドを取得
+      @compile_command = command_select.value[:compile_command]
+      @execute_command = command_select.value[:execute_command]
+
       @dialog = Dialog.new(button, '採点ファイルとコマンドの設定', 455, 490){
         dialog = @dialog.dialog
-        @target_files = command_select.value[:target_files]
-        compile_command = command_select.value[:compile_command]
-        execute_command = command_select.value[:execute_command]
 
         # 採点ファイルリスト
         TkLabel.new(dialog){
@@ -50,7 +56,7 @@ module View
           width 20
           pack({side: 'left'})
         }
-        @file_entry.bind 'Return', self.method(:add_filist)
+        @file_entry.bind 'Return', self.method(:add_filelist)
 
         add_button = TkButton.new(file_frame){
           text '追加'
@@ -72,9 +78,9 @@ module View
 
         @compile_entry = TkEntry.new(dialog){
           width 40
-          text compile_command
           pack({side: 'top'})
         }
+        @compile_entry.value = @compile_command
 
         TkLabel.new(dialog){
           text '※ ファイル名には、変数($0, $1...)を使用してください。'
@@ -89,9 +95,9 @@ module View
 
         @execute_entry = TkEntry.new(dialog){
           width 40
-          text execute_command
           pack({side: 'top'})
         }
+        @execute_entry.value = @execute_command
 
         button_frame = TkFrame.new(dialog){
           pack(side: 'top', pady: 5)
@@ -105,9 +111,9 @@ module View
 
         cancel_button = TkButton.new(button_frame){
           text 'キャンセル'
-          command proc{ @dialog.close }
           pack(side: 'left', padx: 15)
         }
+        cancel_button.command(@dialog.method(:close))
       }
     end
 
@@ -125,7 +131,7 @@ module View
 
     def set_filelist()
       @filelist_box.clear()
-      if @target_files.nil? then
+      if !@target_files.nil? then
         @target_files.each_with_index do |file, i|
           @filelist_box.insert('end', "#{file} -> $#{i}")
         end
