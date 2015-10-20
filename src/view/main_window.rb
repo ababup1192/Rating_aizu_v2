@@ -254,28 +254,34 @@ module View
 
     # 学生一覧でのショートカットキー
     def push_shortcut(e)
-      case e.keycode
-      when 67,   8058628
-        update_score(@shortcut_entries[0].value.to_i)
-      when 68,   7927557
-        update_score(@shortcut_entries[1].value.to_i)
-      when 69,   6551302
-        update_score(@shortcut_entries[2].value.to_i)
-      when 70,   7796487
-        update_score(@shortcut_entries[3].value.to_i)
-      when 8124162
-        target_files = Marshal.load(Marshal.dump(
-          @prefs[:command_select].value[:target_files]))
-        if !target_files.nil? then
-          @file_combobox.current =
-            (@file_combobox.current - 1) % target_files.length
-        end
-      when 8189699
-        target_files = Marshal.load(Marshal.dump(
-          @prefs[:command_select].value[:target_files]))
-        if !target_files.nil? then
-          @file_combobox.current =
-            (@file_combobox.current + 1) % target_files.length
+      if !@prefs.nil?
+        case e.keycode
+        when 67,   8058628
+          update_score(@shortcut_entries[0].value.to_i)
+        when 68,   7927557
+          update_score(@shortcut_entries[1].value.to_i)
+        when 69,   6551302
+          update_score(@shortcut_entries[2].value.to_i)
+        when 70,   7796487
+          update_score(@shortcut_entries[3].value.to_i)
+        when 8124162
+          target_files = Marshal.load(Marshal.dump(
+            @prefs[:command_select].value[:target_files]))
+          if !target_files.nil? then
+            if !target_files.empty?
+              @file_combobox.current =
+                (@file_combobox.current - 1) % target_files.length
+            end
+          end
+        when 8189699
+          target_files = Marshal.load(Marshal.dump(
+            @prefs[:command_select].value[:target_files]))
+          if !target_files.nil? then
+            if !target_files.empty? then
+              @file_combobox.current =
+                (@file_combobox.current + 1) % target_files.length
+            end
+          end
         end
       end
     end
@@ -320,16 +326,17 @@ module View
     end
 
     def select_mailinglist()
-      @cur_index = @mailing_list_box.curselection[0]
-      set_score()
-      set_filebox()
-      set_source_text()
-      @compile_textsc.set_text('')
-      @execute_textsc.set_text('')
-      if @mediator.rating? then
-        mark_next()
+      if !@prefs.nil? then
+        @cur_index = @mailing_list_box.curselection[0]
+        set_score()
+        set_filebox()
+        set_source_text()
+        @compile_textsc.set_text('')
+        @execute_textsc.set_text('')
+        if @mediator.rating? then
+          mark_next()
+        end
       end
-
     end
 
     def update(prefs)
