@@ -53,6 +53,7 @@ class RatingManager
     if @current_rating != nil then
       @current_rating.exit
     end
+
     @current_rating = Rating.new(user_id, @target_files)
     @current_rating.execute
   end
@@ -63,7 +64,6 @@ class RatingManager
     user = @user_repo.find_user(@current_rating.user_id)
     user.point = point
     @user_repo.update_user!(user)
-    # TODO user_repoをMainWindowへ反映
   end
 
   # 現在の採点を終了する

@@ -114,11 +114,21 @@ class TkTextWithScrollbar
         @tk_text.value = value
       # disabledの場合は、テキストを挿入してから状態を戻す。
       else
-        @tk_text.state = 'normal'
-        @tk_text.value = value
-        @tk_text.state = 'disabled'
+        TkUtils.set_text_value(@tk_text, value)
       end
     end
+  end
+
+  def set_errtext(value)
+    if !value.nil?
+      if @tk_text.state == 'normal' then
+        @tk_text.value = value
+      # disabledの場合は、テキストを挿入してから状態を戻す。
+      else
+        TkUtils.set_errtext(@tk_text, value)
+      end
+    end
+
   end
 end
 

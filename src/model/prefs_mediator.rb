@@ -28,7 +28,7 @@ class PreferencesMediator
                 command_select: command_select,  input: input,
                 result_file: result_file, delimiter: delimiter}
     end
-    new_prefs = @prefs.clone
+    new_prefs = Marshal.load(Marshal.dump(@prefs))
     new_prefs.values.each{ |pref| pref.change_observer!(observer) }
     new_prefs
   end

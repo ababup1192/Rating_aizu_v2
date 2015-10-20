@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'concurrent'
 require 'timeout'
+require_relative '../view/main_window'
 
 # コマンド実行後の処理をするためのObserver
 class PostTask
@@ -104,18 +105,18 @@ class ExecuteManager
   # @param [Integer] time タイムアウト時間(秒)
   def initialize(execute_dir, compile_command, execute_command, time, input_flag)
     # 実行コマンドのオブザーバーの生成
+    @main_window = View::MainWindow.instance
+
     execute_task = PostTask.new
     execute_task.register(:stdout) do |value|
       if !value.empty?
-        main_window = MainWindow.instance
-        main_window.set_execute_result(value)
+        @main_window.execute_textsc.set_text(value)
       end
     end
 
     execute_task.register(:stderr) do |reason|
       if !reason.empty?
-        main_window = MainWindow.instance
-        main_window.set_execute_err(reason)
+        @main_window.execute_textsc.set_errtext(reason)
       end
     end
 
@@ -126,16 +127,14 @@ class ExecuteManager
     compile_task = PostTask.new
     compile_task.register(:stdout) do |value|
       if !value.empty?
-        main_window = MainWindow.instance
-        main_window.set_compile_result(value)
+        @main_window.compile_textsc.set_text(value)
       end
       @executor.execute
     end
 
     compile_task.register(:stderr) do |reason|
       if !reason.empty?
-        main_window = MainWindow.instance
-        main_window.set_compile_err(reason)
+        @main_window.compile_textsc.set_errtext(reason)
       end
       @executor.execute
     end

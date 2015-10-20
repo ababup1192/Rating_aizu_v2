@@ -15,6 +15,8 @@ module View
 
     def initialize(button, prefs)
       @prefs = prefs
+      main_window = View::MainWindow.instance
+      add_observer(main_window)
 
       @dialog = Dialog.new(button, '採点設定', 470, 590){
         dialog = @dialog.dialog
@@ -90,15 +92,7 @@ module View
           text 'OK'
           pack(side: 'left')
         }
-        ok_button.command(
-          proc{
-            main_window = MainWindow.instance
-            main_window.set_preferences_label()
-            # main_window.set_mailing_list_box(@ml_path)
-            # main_window.set_rating()
-            @dialog.close
-          }
-        )
+        ok_button.command(self.method(:save_value))
 
         cancel_button = TkButton.new(button_frame){
           text 'キャンセル'
@@ -112,9 +106,10 @@ module View
       @dialog.launch()
     end
 
-    def save_input()
+    def save_value()
+      @prefs.save_prefs()
       changed
-      notify_observers(@input_textsc.get_text)
+      notify_observers(@prefs.value)
       @dialog.close
     end
 

@@ -18,12 +18,13 @@ end
 
 # ユーザ全体を管理する
 class UserRepository
-  attr_accessor :users
+  attr_reader :users
 
   # メーリングリストからユーザのリストへと変換
   # @param [String] mailing_list メーリングリスト
-  def initialize(mailing_list)
-    @users = mailing_list.map{ |mail| User.new(mail) }
+  def initialize(mailinglist)
+    @mailinglist = mailinglist
+    @users = mailinglist.map{ |mail| User.new(mail) }
   end
 
   # ユーザの検索
@@ -31,6 +32,10 @@ class UserRepository
   # @return [User] ユーザ
   def find_user(user_id)
     @users.find{ |user| user.id == user_id }
+  end
+
+  def get_userslist()
+    @users.map{ |user| user.id }
   end
 
   # ユーザ情報(主に点数)の更新
