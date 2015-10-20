@@ -1,0 +1,1505 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: View::MainWindow
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!View/MainWindow.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../View.html" title="View (module)">View</a></span></span>
+     &raquo; 
+    <span class="title">MainWindow</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: View::MainWindow
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">View::MainWindow</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Observable, Singleton</dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">view/main_window.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compile_textsc-instance_method" title="#compile_textsc (instance method)">- (Object) <strong>compile_textsc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute compile_textsc.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#execute_textsc-instance_method" title="#execute_textsc (instance method)">- (Object) <strong>execute_textsc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute execute_textsc.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#launch-instance_method" title="#launch (instance method)">- (Object) <strong>launch</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mark_next-instance_method" title="#mark_next (instance method)">- (Object) <strong>mark_next</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_shortcut-instance_method" title="#push_shortcut (instance method)">- (Object) <strong>push_shortcut</strong>(e) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>学生一覧でのショートカットキー.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_mailinglist-instance_method" title="#select_mailinglist (instance method)">- (Object) <strong>select_mailinglist</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_filebox-instance_method" title="#set_filebox (instance method)">- (Object) <strong>set_filebox</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>ファイルのコンボボックス読み込み.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_mailinglist-instance_method" title="#set_mailinglist (instance method)">- (Object) <strong>set_mailinglist</strong>(file_path = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_preferences_label-instance_method" title="#set_preferences_label (instance method)">- (Object) <strong>set_preferences_label</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_score-instance_method" title="#set_score (instance method)">- (Object) <strong>set_score</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_source_text-instance_method" title="#set_source_text (instance method)">- (Object) <strong>set_source_text</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>ソースコードの読み込み.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong>(prefs) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_score-instance_method" title="#update_score (instance method)">- (Object) <strong>update_score</strong>(score) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>成績の更新.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="compile_textsc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>compile_textsc</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute compile_textsc</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compile_textsc'>compile_textsc</span>
+  <span class='ivar'>@compile_textsc</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="execute_textsc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>execute_textsc</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute execute_textsc</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_execute_textsc'>execute_textsc</span>
+  <span class='ivar'>@execute_textsc</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="launch-instance_method">
+  
+    - (<tt>Object</tt>) <strong>launch</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_launch'>launch</span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>../main</span><span class='tstring_end'>'</span></span>
+  <span class='ivar'>@mediator</span> <span class='op'>=</span> <span class='const'>PreferencesMediator</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='ivar'>@main_window</span> <span class='op'>=</span> <span class='const'>Model</span><span class='op'>::</span><span class='const'>MainWindow</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+
+  <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='const'>TkRoot</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_title'>title</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Rating Aizu</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_resizable'>resizable</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_geometry'>geometry</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>820x580+150+150</span><span class='tstring_end'>'</span></span>
+  <span class='rbrace'>}</span>
+
+  <span class='comment'># 設定ボタン + 警告ラベル
+</span>  <span class='id identifier rubyid_top_frame'>top_frame</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>pady:</span> <span class='int'>15</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_preferences_button'>preferences_button</span> <span class='op'>=</span> <span class='const'>TkButton</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_top_frame'>top_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>設定</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span> <span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span>
+  <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_preferences_button'>preferences_button</span><span class='period'>.</span><span class='id identifier rubyid_command'>command</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_proc'>proc</span><span class='lbrace'>{</span>
+      <span class='const'>View</span><span class='op'>::</span><span class='const'>Preferences</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_preferences_button'>preferences_button</span><span class='comma'>,</span> <span class='const'>Model</span><span class='op'>::</span><span class='const'>Preferences</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_launch'>launch</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='rbrace'>}</span>
+  <span class='rparen'>)</span>
+
+  <span class='ivar'>@preferences_label</span> <span class='op'>=</span> <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_top_frame'>top_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_foreground'>foreground</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>red</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>padx:</span> <span class='int'>20</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_set_preferences_label'>set_preferences_label</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_bottom_frame'>bottom_frame</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>pady:</span> <span class='int'>15</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='comment'># ==== 画面左 ====
+</span>  <span class='id identifier rubyid_bottom_left_frame'>bottom_left_frame</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_frame'>bottom_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>padx:</span> <span class='int'>10</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='comment'># メーリングリスト・成績一覧
+</span>  <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_left_frame'>bottom_left_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>学生・成績 一覧</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span> <span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_mail_frame'>mail_frame</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_left_frame'>bottom_left_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>pady:</span> <span class='int'>15</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_mail_scrollbar'>mail_scrollbar</span> <span class='op'>=</span> <span class='const'>TkScrollbar</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_mail_frame'>mail_frame</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@mailing_list_box</span> <span class='op'>=</span> <span class='const'>TkListbox</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_mail_frame'>mail_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_height'>height</span> <span class='int'>12</span>
+    <span class='id identifier rubyid_yscrollbar'>yscrollbar</span> <span class='id identifier rubyid_mail_scrollbar'>mail_scrollbar</span>
+    <span class='id identifier rubyid_pack'>pack</span> <span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span>
+  <span class='rbrace'>}</span>
+  <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&lt;ListboxSelect&gt;</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:select_mailinglist</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Return</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_proc'>proc</span><span class='lbrace'>{</span>
+    <span class='ivar'>@score_entry</span><span class='period'>.</span><span class='id identifier rubyid_focus'>focus</span>
+    <span class='ivar'>@score_entry</span><span class='period'>.</span><span class='id identifier rubyid_selection_range'>selection_range</span><span class='lparen'>(</span><span class='int'>0</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>end</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+  <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Key</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:push_shortcut</span><span class='rparen'>)</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_mail_scrollbar'>mail_scrollbar</span><span class='period'>.</span><span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>right</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>fill:</span> <span class='symbol'>:y</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_score_frame'>score_frame</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_left_frame'>bottom_left_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>pady:</span> <span class='int'>15</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='comment'># 点数
+</span>  <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_score_frame'>score_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>点数</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='ivar'>@score_entry</span> <span class='op'>=</span> <span class='const'>TkEntry</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_score_frame'>score_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_width'>width</span> <span class='int'>5</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>padx:</span> <span class='int'>25</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+  <span class='ivar'>@score_entry</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Return</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_score</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Return</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_proc'>proc</span><span class='lbrace'>{</span>
+    <span class='ivar'>@score_entry</span><span class='period'>.</span><span class='id identifier rubyid_focus'>focus</span>
+    <span class='ivar'>@score_entry</span><span class='period'>.</span><span class='id identifier rubyid_selection_range'>selection_range</span><span class='lparen'>(</span><span class='int'>0</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>end</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='comment'># ショートカット
+</span>  <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_left_frame'>bottom_left_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ショートカット</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_shortcut_frame1'>shortcut_frame1</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_left_frame'>bottom_left_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>pady:</span> <span class='int'>5</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_shortcut_frame2'>shortcut_frame2</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_left_frame'>bottom_left_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>pady:</span> <span class='int'>5</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='ivar'>@shortcut_entries</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+
+  <span class='lparen'>(</span><span class='int'>1</span><span class='op'>..</span><span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>&lt;=</span> <span class='int'>2</span> <span class='kw'>then</span>
+      <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_shortcut_frame1'>shortcut_frame1</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+        <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>F</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_i'>i</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>padx:</span> <span class='int'>10</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_shortcut_entry'>shortcut_entry</span> <span class='op'>=</span> <span class='const'>TkEntry</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_shortcut_frame1'>shortcut_frame1</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+        <span class='id identifier rubyid_width'>width</span> <span class='int'>5</span>
+        <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>padx:</span> <span class='int'>5</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+      <span class='ivar'>@shortcut_entries</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_shortcut_entry'>shortcut_entry</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_shortcut_frame2'>shortcut_frame2</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+        <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>F</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_i'>i</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>padx:</span> <span class='int'>10</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_shortcut_entry'>shortcut_entry</span> <span class='op'>=</span> <span class='const'>TkEntry</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_shortcut_frame2'>shortcut_frame2</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+        <span class='id identifier rubyid_width'>width</span> <span class='int'>5</span>
+        <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>padx:</span> <span class='int'>5</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+      <span class='ivar'>@shortcut_entries</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_shortcut_entry'>shortcut_entry</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># @mailing_list_box.bind('Key', self.method(:push_shortcut))
+</span>
+  <span class='comment'># ==== 画面中央 ====
+</span>  <span class='id identifier rubyid_bottom_center_frame'>bottom_center_frame</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_frame'>bottom_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>  <span class='label'>padx:</span> <span class='int'>10</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='comment'># ==== ソースコード表示 ====
+</span>  <span class='id identifier rubyid_combobox_var'>combobox_var</span> <span class='op'>=</span> <span class='const'>TkVariable</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+  <span class='ivar'>@file_combobox</span> <span class='op'>=</span> <span class='const'>TkCombobox</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_center_frame'>bottom_center_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_textvariable'>textvariable</span> <span class='id identifier rubyid_combobox_var'>combobox_var</span>
+    <span class='id identifier rubyid_state'>state</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>readonly</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_combobox_var'>combobox_var</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>w</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_proc'>proc</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_set_source_text'>set_source_text</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@source_textsc</span> <span class='op'>=</span> <span class='const'>TkTextWithScrollbar</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_center_frame'>bottom_center_frame</span><span class='comma'>,</span>
+                                           <span class='int'>35</span><span class='comma'>,</span> <span class='int'>24</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>disabled</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@source_textsc</span><span class='period'>.</span><span class='id identifier rubyid_pack'>pack</span>
+
+  <span class='comment'># ==== 画面右 ====
+</span>  <span class='id identifier rubyid_bottom_right_frame'>bottom_right_frame</span> <span class='op'>=</span> <span class='const'>TkFrame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_frame'>bottom_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>left</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>  <span class='label'>padx:</span> <span class='int'>10</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='comment'># ==== コンパイル・実行 結果 ====
+</span>  <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_right_frame'>bottom_right_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>コンパイル結果</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='ivar'>@compile_textsc</span> <span class='op'>=</span> <span class='const'>TkTextWithScrollbar</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_right_frame'>bottom_right_frame</span><span class='comma'>,</span>
+                                            <span class='int'>35</span><span class='comma'>,</span> <span class='int'>5</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>disabled</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@compile_textsc</span><span class='period'>.</span><span class='id identifier rubyid_pack'>pack</span>
+
+  <span class='const'>TkLabel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_right_frame'>bottom_right_frame</span><span class='rparen'>)</span><span class='lbrace'>{</span>
+    <span class='id identifier rubyid_text'>text</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>実行結果</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>side:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>top</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='ivar'>@execute_textsc</span> <span class='op'>=</span> <span class='const'>TkTextWithScrollbar</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_bottom_right_frame'>bottom_right_frame</span><span class='comma'>,</span>
+                                            <span class='int'>35</span><span class='comma'>,</span> <span class='int'>15</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>disabled</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@execute_textsc</span><span class='period'>.</span><span class='id identifier rubyid_pack'>pack</span>
+
+  <span class='const'>Tk</span><span class='period'>.</span><span class='id identifier rubyid_mainloop'>mainloop</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mark_next-instance_method">
+  
+    - (<tt>Object</tt>) <strong>mark_next</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+323
+324
+325
+326</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 323</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_mark_next'>mark_next</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_user_repo'>user_repo</span><span class='period'>.</span><span class='id identifier rubyid_users'>users</span><span class='lbracket'>[</span><span class='ivar'>@cur_index</span><span class='rbracket'>]</span>
+  <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_manager'>manager</span><span class='period'>.</span><span class='id identifier rubyid_mark_next'>mark_next</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_shortcut-instance_method">
+  
+    - (<tt>Object</tt>) <strong>push_shortcut</strong>(e) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>学生一覧でのショートカットキー</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 256</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_push_shortcut'>push_shortcut</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@prefs</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_keycode'>keycode</span>
+    <span class='kw'>when</span> <span class='int'>67</span><span class='comma'>,</span>   <span class='int'>8058628</span>
+      <span class='id identifier rubyid_update_score'>update_score</span><span class='lparen'>(</span><span class='ivar'>@shortcut_entries</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='int'>68</span><span class='comma'>,</span>   <span class='int'>7927557</span>
+      <span class='id identifier rubyid_update_score'>update_score</span><span class='lparen'>(</span><span class='ivar'>@shortcut_entries</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='int'>69</span><span class='comma'>,</span>   <span class='int'>6551302</span>
+      <span class='id identifier rubyid_update_score'>update_score</span><span class='lparen'>(</span><span class='ivar'>@shortcut_entries</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='int'>70</span><span class='comma'>,</span>   <span class='int'>7796487</span>
+      <span class='id identifier rubyid_update_score'>update_score</span><span class='lparen'>(</span><span class='ivar'>@shortcut_entries</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='int'>8124162</span>
+      <span class='id identifier rubyid_target_files'>target_files</span> <span class='op'>=</span> <span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span>
+        <span class='ivar'>@prefs</span><span class='lbracket'>[</span><span class='symbol'>:command_select</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='symbol'>:target_files</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>then</span>
+        <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+          <span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span> <span class='op'>=</span>
+            <span class='lparen'>(</span><span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+    <span class='kw'>when</span> <span class='int'>8189699</span>
+      <span class='id identifier rubyid_target_files'>target_files</span> <span class='op'>=</span> <span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span>
+        <span class='ivar'>@prefs</span><span class='lbracket'>[</span><span class='symbol'>:command_select</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='symbol'>:target_files</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>then</span>
+        <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='kw'>then</span>
+          <span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span> <span class='op'>=</span>
+            <span class='lparen'>(</span><span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_mailinglist-instance_method">
+  
+    - (<tt>Object</tt>) <strong>select_mailinglist</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 328</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_select_mailinglist'>select_mailinglist</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@prefs</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>then</span>
+    <span class='ivar'>@cur_index</span> <span class='op'>=</span> <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_curselection'>curselection</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_set_score'>set_score</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_set_filebox'>set_filebox</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_set_source_text'>set_source_text</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='ivar'>@compile_textsc</span><span class='period'>.</span><span class='id identifier rubyid_set_text'>set_text</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='ivar'>@execute_textsc</span><span class='period'>.</span><span class='id identifier rubyid_set_text'>set_text</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='ivar'>@mediator</span><span class='period'>.</span><span class='id identifier rubyid_rating?'>rating?</span> <span class='kw'>then</span>
+      <span class='id identifier rubyid_mark_next'>mark_next</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_filebox-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_filebox</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>ファイルのコンボボックス読み込み</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 290</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_filebox'>set_filebox</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_target_files'>target_files</span> <span class='op'>=</span> <span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>Marshal</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span>
+    <span class='ivar'>@prefs</span><span class='lbracket'>[</span><span class='symbol'>:command_select</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='symbol'>:target_files</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='kw'>then</span>
+    <span class='id identifier rubyid_user_repo'>user_repo</span> <span class='op'>=</span> <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_user_repo'>user_repo</span>
+    <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_user_repo'>user_repo</span><span class='period'>.</span><span class='id identifier rubyid_users'>users</span><span class='lbracket'>[</span><span class='ivar'>@cur_index</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_map!'>map!</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span>
+      <span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>$id</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span> <span class='op'>=</span> <span class='id identifier rubyid_target_files'>target_files</span>
+    <span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_mailinglist-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_mailinglist</strong>(file_path = nil) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 210</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_mailinglist'>set_mailinglist</span><span class='lparen'>(</span><span class='id identifier rubyid_file_path'>file_path</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+  <span class='comment'># ユーザリポジトリ読み込み
+</span>  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_file_path'>file_path</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>then</span>
+      <span class='id identifier rubyid_user_repo'>user_repo</span> <span class='op'>=</span> <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_create_user_repo'>create_user_repo</span><span class='lparen'>(</span><span class='id identifier rubyid_file_path'>file_path</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+      <span class='id identifier rubyid_user_repo'>user_repo</span> <span class='op'>=</span> <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_user_repo'>user_repo</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user_repo'>user_repo</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>then</span>
+    <span class='comment'># 学生・成績 一覧に反映
+</span>    <span class='id identifier rubyid_user_repo'>user_repo</span><span class='period'>.</span><span class='id identifier rubyid_users'>users</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_user'>user</span><span class='op'>|</span>
+      <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>end</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_preferences_label-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_preferences_label</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 198</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_preferences_label'>set_preferences_label</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@mediator</span><span class='period'>.</span><span class='id identifier rubyid_get_notset_prefs'>get_notset_prefs</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='kw'>then</span>
+    <span class='ivar'>@preferences_label</span><span class='period'>.</span><span class='id identifier rubyid_foreground'>foreground</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>red</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_label_text'>label_text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>採点の設定を行ってください。\n</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='ivar'>@mediator</span><span class='period'>.</span><span class='id identifier rubyid_get_notset_prefs_name'>get_notset_prefs_name</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>, </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='ivar'>@preferences_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_label_text'>label_text</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@preferences_label</span><span class='period'>.</span><span class='id identifier rubyid_foreground'>foreground</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>blue</span><span class='tstring_end'>'</span></span>
+    <span class='ivar'>@preferences_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>採点準備完了</span><span class='tstring_end'>'</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_score-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_score</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+228
+229
+230
+231
+232
+233
+234</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 228</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_score'>set_score</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_user_repo'>user_repo</span> <span class='op'>=</span> <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_user_repo'>user_repo</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user_repo'>user_repo</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_user_repo'>user_repo</span><span class='period'>.</span><span class='id identifier rubyid_users'>users</span><span class='lbracket'>[</span><span class='ivar'>@cur_index</span><span class='rbracket'>]</span>
+    <span class='ivar'>@score_entry</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_score'>score</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_source_text-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_source_text</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>ソースコードの読み込み</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 309</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_source_text'>set_source_text</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_rating_dir'>rating_dir</span> <span class='op'>=</span> <span class='ivar'>@prefs</span><span class='lbracket'>[</span><span class='symbol'>:rating_dir</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_rating_dir'>rating_dir</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>then</span>
+    <span class='id identifier rubyid_file_path'>file_path</span> <span class='op'>=</span> <span class='id identifier rubyid_rating_dir'>rating_dir</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/</span><span class='tstring_end'>'</span></span> <span class='op'>+</span> <span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='ivar'>@file_combobox</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_std_hash'>std_hash</span> <span class='op'>=</span> <span class='const'>FileUtil</span><span class='period'>.</span><span class='id identifier rubyid_open_file'>open_file</span><span class='lparen'>(</span><span class='id identifier rubyid_file_path'>file_path</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_std_hash'>std_hash</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:stdout</span><span class='rparen'>)</span> <span class='kw'>then</span>
+      <span class='ivar'>@source_textsc</span><span class='period'>.</span><span class='id identifier rubyid_set_text'>set_text</span><span class='lparen'>(</span><span class='id identifier rubyid_std_hash'>std_hash</span><span class='lbracket'>[</span><span class='symbol'>:stdout</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='ivar'>@source_textsc</span><span class='period'>.</span><span class='id identifier rubyid_set_text'>set_text</span><span class='lparen'>(</span><span class='id identifier rubyid_std_hash'>std_hash</span><span class='lbracket'>[</span><span class='symbol'>:stderr</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong>(prefs) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 342</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_prefs'>prefs</span><span class='rparen'>)</span>
+  <span class='ivar'>@prefs</span> <span class='op'>=</span> <span class='id identifier rubyid_prefs'>prefs</span>
+
+  <span class='comment'># 設定ラベル
+</span>  <span class='id identifier rubyid_set_preferences_label'>set_preferences_label</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+  <span class='comment'># メーリングリスト
+</span>  <span class='id identifier rubyid_mailinglist_path'>mailinglist_path</span> <span class='op'>=</span> <span class='id identifier rubyid_prefs'>prefs</span><span class='lbracket'>[</span><span class='symbol'>:mailinglist</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+  <span class='id identifier rubyid_set_mailinglist'>set_mailinglist</span><span class='lparen'>(</span><span class='id identifier rubyid_mailinglist_path'>mailinglist_path</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@mediator</span><span class='period'>.</span><span class='id identifier rubyid_rating?'>rating?</span> <span class='kw'>then</span>
+    <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_set_rating'>set_rating</span><span class='lparen'>(</span><span class='id identifier rubyid_prefs'>prefs</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_score-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_score</strong>(score) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>成績の更新</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'view/main_window.rb', line 237</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_score'>update_score</span><span class='lparen'>(</span><span class='id identifier rubyid_score'>score</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@cur_index</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_user_repo'>user_repo</span> <span class='op'>=</span> <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_user_repo'>user_repo</span>
+    <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_user_repo'>user_repo</span><span class='period'>.</span><span class='id identifier rubyid_users'>users</span><span class='lbracket'>[</span><span class='ivar'>@cur_index</span><span class='rbracket'>]</span>
+
+    <span class='kw'>if</span> <span class='id identifier rubyid_score'>score</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span> <span class='kw'>then</span>
+      <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_update_user!'>update_user!</span><span class='lparen'>(</span><span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_score'>score</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='ivar'>@main_window</span><span class='period'>.</span><span class='id identifier rubyid_update_user!'>update_user!</span><span class='lparen'>(</span><span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='ivar'>@score_entry</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_set_mailinglist'>set_mailinglist</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_selection_set'>selection_set</span><span class='lparen'>(</span><span class='ivar'>@cur_index</span><span class='rparen'>)</span>
+    <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_focus'>focus</span>
+    <span class='ivar'>@mailing_list_box</span><span class='period'>.</span><span class='id identifier rubyid_activate'>activate</span><span class='lparen'>(</span><span class='ivar'>@cur_index</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Tue Oct 20 14:49:36 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

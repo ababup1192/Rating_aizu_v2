@@ -94,7 +94,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">rating.rb</dd>
+    <dd class="r2 last">model/rating.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -156,6 +156,28 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_inputfile-instance_method" title="#add_inputfile (instance method)">- (Object) <strong>add_inputfile</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -299,25 +321,41 @@
       <pre class="lines">
 
 
-81
-82
 83
 84
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'model/rating.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_target_files'>target_files</span><span class='rparen'>)</span>
   <span class='ivar'>@user_id</span> <span class='op'>=</span> <span class='id identifier rubyid_user_id'>user_id</span>
   <span class='ivar'>@uuid</span> <span class='op'>=</span> <span class='const'>SecureRandom</span><span class='period'>.</span><span class='id identifier rubyid_uuid'>uuid</span>
-  <span class='ivar'>@target_files</span> <span class='op'>=</span> <span class='id identifier rubyid_target_files'>target_files</span>
-  <span class='ivar'>@manager</span> <span class='op'>=</span> <span class='const'>RatingManager</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='ivar'>@input_flag</span> <span class='op'>=</span> <span class='kw'>false</span>
+
+  <span class='comment'># 採点対象ファイル、コマンドにユーザIDが使われている場合は置換する。
+</span>  <span class='ivar'>@target_files</span> <span class='op'>=</span> <span class='id identifier rubyid_target_files'>target_files</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span>
+    <span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>$id</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='ivar'>@user_id</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>RatingManager</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='ivar'>@compile_command</span> <span class='op'>=</span> <span class='id identifier rubyid_manager'>manager</span><span class='period'>.</span><span class='id identifier rubyid_compile_command'>compile_command</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>$id</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='ivar'>@user_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@execute_command</span> <span class='op'>=</span> <span class='id identifier rubyid_manager'>manager</span><span class='period'>.</span><span class='id identifier rubyid_execute_command'>execute_command</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>$id</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='ivar'>@user_id</span><span class='rparen'>)</span>
   <span class='ivar'>@execute_dir</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/tmp/rating-aizu/</span><span class='tstring_end'>'</span></span> <span class='op'>+</span> <span class='ivar'>@uuid</span>
-  <span class='id identifier rubyid_copy_targetfiles'>copy_targetfiles</span>
+  <span class='id identifier rubyid_copy_targetfiles'>copy_targetfiles</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_inputfile'>add_inputfile</span><span class='lparen'>(</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -357,12 +395,12 @@
       <pre class="lines">
 
 
-76
-77
-78</pre>
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'model/rating.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user_id'>user_id</span>
   <span class='ivar'>@user_id</span>
@@ -380,7 +418,45 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="execute-instance_method">
+  <h3 class="signature first" id="add_inputfile-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_inputfile</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'model/rating.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_inputfile'>add_inputfile</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_manager'>manager</span> <span class='op'>=</span> <span class='const'>RatingManager</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_manager'>manager</span><span class='period'>.</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>then</span>
+    <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='ivar'>@execute_dir</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/input</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>  <span class='id identifier rubyid_manager'>manager</span><span class='period'>.</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+    <span class='ivar'>@input_flag</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="execute-instance_method">
   
     - (<tt>Object</tt>) <strong>execute</strong> 
   
@@ -405,18 +481,18 @@
       <pre class="lines">
 
 
-99
-100
-101
-102
-103</pre>
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'model/rating.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute'>execute</span>
-  <span class='ivar'>@execute_manager</span> <span class='op'>=</span> <span class='const'>ExecuteManager</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@execute_dir</span><span class='comma'>,</span> <span class='ivar'>@manager</span><span class='period'>.</span><span class='id identifier rubyid_compile_command'>compile_command</span><span class='comma'>,</span>
-                      <span class='ivar'>@manager</span><span class='period'>.</span><span class='id identifier rubyid_execute_command'>execute_command</span><span class='comma'>,</span> <span class='int'>3</span><span class='rparen'>)</span>
+  <span class='ivar'>@execute_manager</span> <span class='op'>=</span> <span class='const'>ExecuteManager</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@execute_dir</span><span class='comma'>,</span> <span class='ivar'>@compile_command</span><span class='comma'>,</span>
+                      <span class='ivar'>@execute_command</span><span class='comma'>,</span> <span class='int'>3</span><span class='comma'>,</span> <span class='ivar'>@input_flag</span><span class='rparen'>)</span>
   <span class='ivar'>@execute_manager</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -450,14 +526,14 @@
       <pre class="lines">
 
 
-106
-107
-108
-109
-110</pre>
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'rating.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'model/rating.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exit'>exit</span>
   <span class='comment'># 実行ディレクトリを削除する
@@ -474,7 +550,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Oct 12 20:32:13 2015 by
+  Generated on Tue Oct 20 14:49:35 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
